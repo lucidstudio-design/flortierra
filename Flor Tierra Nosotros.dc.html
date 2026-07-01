@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  @font-face{font-family:'Moon Flower';src:url('assets/MoonFlower.ttf') format('truetype');font-display:swap}
+    body{background:#F6F3EA;font-family:'Jost',sans-serif;color:#1F3A28;-webkit-font-smoothing:antialiased}
+  .no-sb::-webkit-scrollbar{display:none}
+  .no-sb{scrollbar-width:none}
+  @keyframes toastIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+  .nav-burger{display:none}
+  .nav-mpanel{display:none}
+  .nav-desktop a{transition:color .18s ease}
+  .nav-mpanel a{padding:14px 4px;font-size:16px;border-bottom:1px solid rgba(31,58,40,.07)}
+  @media(max-width:920px){
+    .nav-desktop{display:none!important}
+    .nav-burger{display:flex!important}
+    #ftnav:checked~.nav-mpanel{display:flex!important}
+    .nav-inner{padding-left:22px!important;padding-right:22px!important}
+  }
+  @media(max-width:860px){
+    .stack{flex-direction:column!important}
+    .stack>*{width:100%!important}
+    .grid-4{grid-template-columns:repeat(2,1fr)!important}
+    .grid-vals{grid-template-columns:repeat(2,1fr)!important}
+    .grid-3{grid-template-columns:1fr!important}
+    .pad-x{padding-left:22px!important;padding-right:22px!important}
+  }
+  /* Values never collapse past 2×2 */
+  @media(max-width:520px){ .grid-4{grid-template-columns:1fr!important} }
+  @media (prefers-reduced-motion: no-preference){ .nav-active{animation:navUnderline .6s cubic-bezier(.6,0,.2,1)} }
+  @keyframes navUnderline{from{background-size:0% 2px}to{background-size:100% 2px}}
+</style>
+</helmet>
+
+<div style="overflow-x:clip">
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:60;background:rgba(246,243,234,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(31,58,40,.10)">
+  <div class="nav-inner" style="max-width:1320px;margin:0 auto;padding:0 48px;height:74px;display:flex;align-items:center;justify-content:space-between">
+    <a href="Flor%20Tierra%20Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px">
+      <img src="assets/emblem-green.png" style="width:32px;height:32px;display:block">
+      <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#1F3A28">FLOR TIERRA</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px">
+      <div class="nav-desktop" style="display:flex;align-items:center;gap:36px">
+        <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Productos</a>
+        <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Recetas</a>
+        <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Eventos</a>
+        <a href="Flor%20Tierra%20Nosotros.dc.html" class="nav-active" style="text-decoration:none;font-size:15px;color:#B5532E;font-weight:600;padding-bottom:4px;background-image:linear-gradient(#B5532E,#B5532E);background-position:0 100%;background-repeat:no-repeat;background-size:100% 2px">Nosotros</a>
+        <span style="width:1px;height:20px;background:rgba(31,58,40,.16)"></span>
+        <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#F6F3EA;font-weight:500;background:#B5532E;padding:9px 20px;border-radius:40px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Contacto</a>
+      </div>
+      
+      <label for="ftnav" class="nav-burger" aria-label="Menú" style="width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(31,58,40,.18);align-items:center;justify-content:center;cursor:pointer;flex:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3A28" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </label>
+    </div>
+  </div>
+  <input id="ftnav" type="checkbox" hidden style="display:none">
+  <div class="nav-mpanel" style="flex-direction:column;position:absolute;top:74px;left:0;right:0;background:#F6F3EA;border-bottom:1px solid rgba(31,58,40,.12);padding:6px 24px 16px;box-shadow:0 16px 28px rgba(31,58,40,.10)">
+    <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;color:#1F3A28">Productos</a>
+    <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;color:#1F3A28">Recetas</a>
+    <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;color:#1F3A28">Eventos</a>
+    <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;color:#B5532E;font-weight:500">Nosotros</a>
+    <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;color:#F6F3EA;background:#B5532E;border:none;border-radius:30px;padding:13px 18px;font-weight:600;text-align:center;margin-top:10px">Contacto</a>
+  </div>
+</nav>
+
+<!-- HEADER BANNER -->
+<div style="width:100%;height:clamp(85px,11.5vw,160px);overflow:hidden;background:#DCE7C8;line-height:0">
+  <img src="assets/nosotros-header.png" alt="Flor Tierra — ilustración floral" style="width:100%;height:100%;object-fit:cover;display:block">
+</div>
+
+<!-- NUESTRA HISTORIA -->
+<section data-screen-label="Nosotros" style="background:#F6F3EA;padding:0">
+  <div class="stack" style="max-width:1320px;margin:0 auto;display:flex;align-items:stretch;min-height:560px">
+    <div style="width:50%;padding:clamp(24px,4vw,40px) clamp(20px,3vw,40px) clamp(24px,4vw,40px) clamp(24px,4vw,48px);display:flex;align-items:center">
+      <img src="assets/nuestra-historia.png" alt="Fundadoras de Flor Tierra" class="about-img" style="width:100%;height:auto;object-fit:contain;border-radius:24px;display:block">
+    </div>
+    <div style="width:50%;display:flex;align-items:center;padding:clamp(48px,8vw,90px) clamp(24px,4vw,48px) clamp(48px,8vw,90px) clamp(28px,5vw,72px)">
+      <div style="max-width:480px">
+        <div style="font-family:'Fraunces',serif;font-style:italic;font-size:25px;letter-spacing:0;color:#B5532E;font-weight:500">Nuestra historia</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:clamp(28px,4.2vw,40px);font-weight:500;color:#1F3A28;line-height:1.12;margin-top:16px">De momento a misión</h2>
+        <p style="font-size:16.5px;line-height:1.75;color:#3a4a38;margin-top:20px;font-weight:300">Fundada en mayo de 2017, después de que una de las socias tuvo un padecimiento que la dejó diabética, Flor Tierra surge con la visión de ofrecer snacks y botanas saludables, sin azúcar ni conservadores, y que al mismo tiempo sean muy ricos y nutritivos.</p>
+        <p style="font-size:16.5px;line-height:1.75;color:#3a4a38;margin-top:14px;font-weight:300">Son productos 100% artesanales, cuidadosamente elaborados por sus fundadoras, bajo la firme creencia de que una buena nutrición es la base fundamental de la salud.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION VALUES -->
+<section style="background:#1F3A28;padding:96px clamp(22px,4vw,48px)">
+  <div class="grid-vals" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:28px">
+    <div style="text-align:center;padding:0 12px">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,163,122,.16);display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C8A37A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c-2.8 0-6-1.6-6-6 4 0 6 2.7 6 6z"/><path d="M12 13c0-3.3 3.2-6 6-6 0 4.4-3.2 6-6 6z"/></svg></div>
+      <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:#F6F3EA">Salud</h3>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:10px;font-weight:300">Cuidamos el bienestar a través de una alimentación consciente.</p>
+    </div>
+    <div style="text-align:center;padding:0 12px">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,163,122,.16);display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C8A37A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div>
+      <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:#F6F3EA">Empatía</h3>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:10px;font-weight:300">Entendemos las necesidades de quienes buscan una vida más saludable.</p>
+    </div>
+    <div style="text-align:center;padding:0 12px">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,163,122,.16);display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C8A37A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8a8 8 0 0 1-8 8z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
+      <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:#F6F3EA">Naturalidad</h3>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:10px;font-weight:300">Privilegiamos ingredientes naturales, sin azúcar y sin conservadores.</p>
+    </div>
+    <div style="text-align:center;padding:0 12px">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(200,163,122,.16);display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C8A37A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></div>
+      <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:#F6F3EA">Innovación</h3>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:10px;font-weight:300">Creamos nuevas alternativas saludables sin sacrificar sabor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="background:#F6F3EA;padding:96px 48px">
+  <div class="pad-x" style="max-width:1320px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:54px">
+      <div style="font-family:'Fraunces',serif;font-style:italic;font-size:25px;letter-spacing:0;color:#B5532E;font-weight:500;margin-bottom:14px">Nuestro proceso</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(30px,4.6vw,44px);font-weight:500;color:#1F3A28;line-height:1.08;letter-spacing:-.01em">De la materia prima a tu casa</h2>
+    </div>
+    <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:26px">
+      <div>
+        <img src="slot-img/ft-proc-1.webp" alt="" style="width:100%;height:220px;display:block;border-radius:18px;background:#DCE7C8;overflow:hidden;position:relative;object-fit:cover;display:block">
+        <div style="font-family:'Fraunces',serif;font-size:40px;color:#C8A37A;margin-top:18px;font-weight:600">01</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:#1F3A28;margin-top:4px">Seleccionamos</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#7a8a76;margin-top:8px;font-weight:300">Elegimos nueces y semillas de la mejor calidad, una por una.</p>
+      </div>
+      <div>
+        <img src="slot-img/tostamos.png" alt="" style="width:100%;height:220px;display:block;border-radius:18px;object-fit:cover;display:block">
+        <div style="font-family:'Fraunces',serif;font-size:40px;color:#C8A37A;margin-top:18px;font-weight:600">02</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:#1F3A28;margin-top:4px">Tostamos</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#7a8a76;margin-top:8px;font-weight:300">En lotes pequeños y a fuego lento, para el punto exacto de sabor.</p>
+      </div>
+      <div>
+        <img src="slot-img/ft-proc-3.webp" alt="" style="width:100%;height:220px;display:block;border-radius:18px;background:#DCE7C8;overflow:hidden;position:relative;object-fit:cover;display:block">
+        <div style="font-family:'Fraunces',serif;font-size:40px;color:#C8A37A;margin-top:18px;font-weight:600">03</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:#1F3A28;margin-top:4px">Empacamos</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#7a8a76;margin-top:8px;font-weight:300">A mano, cuidando que cada bolsa llegue fresca y completa.</p>
+      </div>
+      <div>
+        <img src="slot-img/ft-proc-4.webp" alt="" style="width:100%;height:220px;display:block;border-radius:18px;background:#DCE7C8;overflow:hidden;position:relative;object-fit:cover;display:block">
+        <div style="font-family:'Fraunces',serif;font-size:40px;color:#C8A37A;margin-top:18px;font-weight:600">04</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:#1F3A28;margin-top:4px">Enviamos</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#7a8a76;margin-top:8px;font-weight:300">A todo México, para que disfrutes Flor Tierra estés donde estés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:#B5532E;padding:90px 48px;text-align:center;position:relative;overflow:hidden">
+  <img src="assets/emblem-cream.png" style="position:absolute;left:max(-196px, calc((100vw - 760px)/2 - 380px));top:50%;transform:translateY(-50%);width:340px;opacity:.10;pointer-events:none">
+  <img src="assets/emblem-cream.png" style="position:absolute;right:max(-156px, calc((100vw - 760px)/2 - 340px));top:50%;transform:translateY(-50%);width:300px;opacity:.10;pointer-events:none">
+  <div style="position:relative;max-width:760px;margin:0 auto">
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(28px,4.6vw,44px);font-weight:500;color:#F6F3EA;line-height:1.1">Prueba la diferencia de lo hecho a mano.</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px">
+      <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;background:#F6F3EA;color:#1F3A28;padding:16px 32px;border-radius:40px;font-size:16px;font-weight:600;transition:transform .2s ease,background .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-2px) scale(1.02);background:#fff;box-shadow:0 8px 20px rgba(13,20,14,.18)">Ver productos →</a>
+      <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;background:transparent;color:#F6F3EA;padding:16px 28px;border-radius:40px;font-size:16px;font-weight:500;border:1.5px solid rgba(246,243,234,.4);transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="border-color:#F6F3EA;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Contáctanos</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#1F3A28;padding:74px 48px 36px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap">
+    <div style="max-width:300px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="assets/emblem-cream.png" style="width:34px;height:34px;display:block">
+        <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#F6F3EA">FLOR TIERRA</span>
+      </div>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:18px;font-weight:300">Botanas artesanales sin azúcar añadida. Hechas a mano en Monterrey, enviadas a todo México.</p>
+      <div style="display:flex;gap:12px;margin-top:22px">
+        <a href="https://instagram.com/flortierramty" target="_blank" aria-label="Instagram" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,243,234,.22);display:flex;align-items:center;justify-content:center" style-hover="background:rgba(246,243,234,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#F6F3EA" stroke="none"/></svg></a>
+        <a href="https://wa.me/528100000000" target="_blank" aria-label="WhatsApp" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,243,234,.22);display:flex;align-items:center;justify-content:center" style-hover="background:rgba(246,243,234,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="#F6F3EA"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.2-1.4A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.7 0 1.3z"/></svg></a>
+      </div>
+    </div>
+    <div style="display:flex;gap:64px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Tienda</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Todos los productos</a>
+          <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Recetas</a>
+          <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Eventos</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Empresa</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Nosotros</a>
+          <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:42px auto 0;padding-top:26px;border-top:1px solid rgba(246,243,234,.12)">
+    <span style="font-size:13.5px;color:#7e8f79">© 2026 Flor Tierra. Hecho con cariño en Monterrey, México.</span>
+  </div>
+</footer>
+
+
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){ super(props); this.state = { cart: this.loadCart(), cartOpen:false }; }
+  loadCart(){ try { return JSON.parse(localStorage.getItem('ft-cart')||'[]'); } catch(e){ return []; } }
+  money(n){ return '$' + n.toLocaleString('es-MX'); }
+  changeQty(id,d){ const cart=this.state.cart.map(c=>c.id===id?{...c,qty:Math.max(1,c.qty+d)}:c); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
+  removeItem(id){ const cart=this.state.cart.filter(c=>c.id!==id); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
+  renderVals(){
+    const cart = this.state.cart.map(c => ({ ...c, letter:c.name.charAt(0), priceLabel:this.money(c.price*c.qty), inc:()=>this.changeQty(c.id,1), dec:()=>this.changeQty(c.id,-1), remove:()=>this.removeItem(c.id) }));
+    const count = this.state.cart.reduce((a,c)=>a+c.qty,0);
+    const subtotal = this.state.cart.reduce((a,c)=>a+c.price*c.qty,0);
+    return {
+      cart, cartCount:count, hasItems:count>0, isEmpty:count===0, subtotalLabel:this.money(subtotal),
+      drawerTransform: this.state.cartOpen ? 'translateX(0)' : 'translateX(100%)',
+      overlayOpacity: this.state.cartOpen ? '1' : '0', overlayPointer: this.state.cartOpen ? 'auto' : 'none',
+      openCart:()=>this.setState({cartOpen:true}), closeCart:()=>this.setState({cartOpen:false}),
+    };
+  }
+}
+</script>
+</body>
+</html>

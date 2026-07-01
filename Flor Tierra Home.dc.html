@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  @font-face{font-family:'Moon Flower';src:url('assets/MoonFlower.ttf') format('truetype');font-display:swap}
+    html{scroll-behavior:smooth}
+  body{background:#F6F3EA;font-family:'Jost',sans-serif;color:#1F3A28;-webkit-font-smoothing:antialiased}
+  .no-sb::-webkit-scrollbar{display:none}
+  .no-sb{scrollbar-width:none}
+  @keyframes toastIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+  @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes tSlideNext{from{opacity:0;transform:translateX(34px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes tSlidePrev{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:translateX(0)}}
+  .nav-burger{display:none}
+  .nav-mpanel{display:none}
+  .nav-desktop a{transition:color .18s ease}
+  .nav-mpanel a{padding:14px 4px;font-size:16px;border-bottom:1px solid rgba(31,58,40,.07)}
+  @media(max-width:920px){
+    .nav-desktop{display:none!important}
+    .nav-burger{display:flex!important}
+    #ftnav:checked~.nav-mpanel{display:flex!important}
+    .nav-inner{padding-left:22px!important;padding-right:22px!important}
+  }
+  .tnav-arrow-m{display:none}
+  .mp-car{scroll-padding-left:48px;scroll-padding-right:48px}
+  @media(max-width:860px){
+    .stack{flex-direction:column!important}
+    .stack>*{width:100%!important}
+    .pad-x{padding-left:24px!important;padding-right:24px!important}
+    .mp-car{scroll-padding-left:24px!important;scroll-padding-right:24px!important}
+    .grid-3{grid-template-columns:repeat(2,1fr)!important}
+    .evt-row{gap:36px!important}
+    .hero-copy{padding:64px 24px 60px 24px!important;max-width:none!important}
+    /* fewer recipe cards as the grid narrows */
+    .recipes-grid>*:nth-child(n+3){display:none!important}
+  }
+  @media(max-width:560px){
+    .grid-3{grid-template-columns:1fr!important}
+    .pad-x{padding-left:18px!important;padding-right:18px!important}
+    .mp-car{scroll-padding-left:18px!important;scroll-padding-right:18px!important}
+    .sec-pad{padding-top:64px!important;padding-bottom:64px!important}
+    .recipes-grid>*:nth-child(n+2){display:none!important}
+  }
+  @keyframes navUnderline{from{background-size:0% 2px}to{background-size:100% 2px}}
+  @media(max-width:860px){
+    .tnav-arrow{display:none!important}
+    .tnav-arrow-m{display:flex!important}
+  }
+</style>
+</helmet>
+
+<div style="overflow-x:clip">
+
+<!-- ============ STICKY NAV ============ -->
+<nav style="position:sticky;top:0;z-index:60;background:rgba(246,243,234,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(31,58,40,.10)">
+  <div class="nav-inner" style="max-width:1320px;margin:0 auto;padding:0 48px;height:74px;display:flex;align-items:center;justify-content:space-between">
+    <a href="Flor%20Tierra%20Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;cursor:pointer">
+      <img src="assets/emblem-green.png" style="width:32px;height:32px;display:block">
+      <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#1F3A28">FLOR TIERRA</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px">
+      <div class="nav-desktop" style="display:flex;align-items:center;gap:36px">
+        <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Productos</a>
+        <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Recetas</a>
+        <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Eventos</a>
+        <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Nosotros</a>
+        <span style="width:1px;height:20px;background:rgba(31,58,40,.16)"></span>
+        <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#F6F3EA;font-weight:500;background:#B5532E;padding:9px 20px;border-radius:40px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Contacto</a>
+      </div>
+      
+      <label for="ftnav" class="nav-burger" aria-label="Menú" style="width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(31,58,40,.18);align-items:center;justify-content:center;cursor:pointer;flex:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3A28" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </label>
+    </div>
+  </div>
+  <input id="ftnav" type="checkbox" hidden="" style="display:none">
+  <div class="nav-mpanel" style="flex-direction:column;position:absolute;top:74px;left:0;right:0;background:#F6F3EA;border-bottom:1px solid rgba(31,58,40,.12);padding:6px 24px 16px;box-shadow:0 16px 28px rgba(31,58,40,.10)">
+    <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;color:#1F3A28">Productos</a>
+    <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;color:#1F3A28">Recetas</a>
+    <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;color:#1F3A28">Eventos</a>
+    <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;color:#1F3A28">Nosotros</a>
+    <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;color:#F6F3EA;background:#B5532E;border:none;border-radius:30px;padding:13px 18px;font-weight:600;text-align:center;margin-top:10px">Contacto</a>
+  </div>
+</nav>
+
+<!-- ============ HERO (split orgánico) ============ -->
+<section data-screen-label="Hero" class="stack" style="display:flex;min-height:660px">
+  <!-- left forest panel -->
+  <div style="width:56%;background:#1F3A28;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:flex-start">
+    <img src="assets/emblem-cream.png" style="position:absolute;right:-150px;bottom:-140px;width:clamp(448px,40vw,560px);opacity:.06;pointer-events:none">
+    <div class="hero-copy" style="position:relative;padding:80px 60px 80px max(48px, calc((100vw - 1320px)/2 + 48px));width:100%;max-width:none">
+      <div style="font-family:'Fraunces',serif; font-style:italic; font-size:25px; letter-spacing:0; color: #C8A37A; font-weight: 500">De la tierra a tu mesa</div>
+      <h1 style="font-family:'Fraunces',serif;font-size:clamp(40px,7vw,82px);line-height:1.0;font-weight:500;color:#F6F3EA;margin-top:24px;letter-spacing:-.015em">Snacks sanos, <span style="white-space:nowrap">pero <span style="color: #C8A37A">deliciosos</span></span></h1>
+      <p style="font-size:18px;line-height:1.65;color:#cdd8c6;margin-top:28px;max-width:480px;font-weight:300">Nueces, mixes y granolas artesanales de Monterrey. Ingredientes simples, sin azúcar añadida. Enviamos a todo México.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:38px">
+        <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;background:#B5532E;color:#F6F3EA;padding:16px 30px;border-radius:40px;font-size:16px;font-weight:500;border:none;cursor:pointer;white-space:nowrap;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Ver productos →</a>
+        <a href="https://instagram.com/flortierramty" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:transparent;color:#F6F3EA;padding:16px 26px;border-radius:40px;font-size:16px;font-weight:400;border:1.5px solid rgba(246,243,234,.32);cursor:pointer;white-space:nowrap;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="border-color:rgba(246,243,234,.7);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#F6F3EA" stroke="none"></circle></svg>@flortierramty</a>
+        <a href="https://wa.me/528100000000" target="_blank" aria-label="WhatsApp" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:#F6F3EA;width:54px;height:54px;border-radius:50%;border:1.5px solid rgba(246,243,234,.32);cursor:pointer;flex:none;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="border-color:rgba(246,243,234,.7);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#F6F3EA"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.2-1.4A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.7 0 1.3z"></path></svg></a>
+      </div>
+    </div>
+  </div>
+  <!-- right cream panel: product photo -->
+  <div style="width:44%;background:#F6F3EA;position:relative;overflow:hidden;min-height:560px">
+    <img src="assets/hero-jars.png" alt="Almendras artesanales Flor Tierra" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+  </div>
+  </section></div>
+
+
+<!-- ============ MARQUEE ============ -->
+<section style="background:#B5532E;overflow:hidden;padding:16px 0">
+  <div style="display:inline-flex;white-space:nowrap;animation:marquee 30s linear infinite;will-change:transform">
+    <div style="display:inline-flex;align-items:center">
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Sin azúcar añadida</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">100% artesanal</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Ingredientes naturales</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Envíos a todo México</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Hecho a mano en Monterrey</span><span style="color:#EBB99F;font-size:13px">✦</span>
+    </div>
+    <div style="display:inline-flex;align-items:center" aria-hidden="true">
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Sin azúcar añadida</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">100% artesanal</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Ingredientes naturales</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Envíos a todo México</span><span style="color:#EBB99F;font-size:13px">✦</span>
+      <span style="color:#F6F3EA;font-size:15px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:0 30px">Hecho a mano en Monterrey</span><span style="color:#EBB99F;font-size:13px">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PRODUCTS ============ -->
+<section id="productos" data-screen-label="Productos" class="sec-pad" style="background:#F6F3EA;padding:104px 0 110px">
+  <div class="pad-x" style="max-width:1320px;margin:0 auto;padding:0 48px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:44px">
+    <div>
+      <div style="font-family:'Fraunces',serif;font-style:italic;font-size:25px;letter-spacing:0;color:#B5532E;font-weight:500;margin-bottom:14px">Nuestra tienda</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(30px,5vw,48px);font-weight:500;color:#1F3A28;line-height:1.05;letter-spacing:-.01em">Lo más pedido</h2>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28;cursor:pointer;border-bottom:1.5px solid rgba(31,58,40,.3);padding-bottom:2px;transition:color .18s ease,border-color .18s ease" style-hover="color:#B5532E;border-color:#B5532E">Ver todo</a>
+      <button onClick="{{ scrollProductsLeft }}" aria-label="Anterior" style="width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(31,58,40,.25);background:transparent;color:#1F3A28;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease" style-hover="background:#1F3A28;color:#F6F3EA;border-color:#1F3A28;transform:scale(1.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+      <button onClick="{{ scrollProductsRight }}" aria-label="Siguiente" style="width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(31,58,40,.25);background:transparent;color:#1F3A28;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease" style-hover="background:#1F3A28;color:#F6F3EA;border-color:#1F3A28;transform:scale(1.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+    </div>
+  </div>
+  <div ref="{{ productsRef }}" class="no-sb pad-x mp-car" style="max-width:1320px;margin:0 auto;display:flex;gap:24px;overflow-x:auto;padding:16px 48px 32px;scroll-snap-type:x proximity">
+    <sc-for list="{{ products }}" as="p" hint-placeholder-count="5">
+      <div data-card="1" style="flex:none;width:var(--ftcw,270px);scroll-snap-align:start;background:#fff;border-radius:20px;padding:20px;box-shadow:0 2px 4px rgba(31,58,40,.04);transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-6px);box-shadow:0 18px 40px rgba(31,58,40,.12)">
+        <div style="position:relative;height:200px;border-radius:14px;background:#DCE7C8;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <sc-if value="{{ p.tag }}" hint-placeholder-val="">
+            <span style="position:absolute;top:14px;left:14px;z-index:2;background:#B5532E;color:#F6F3EA;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:20px">{{ p.tag }}</span>
+          </sc-if>
+          <sc-if value="{{ p.hasImg }}" hint-placeholder-val="">
+            {{ p.imgEl }}
+          </sc-if>
+          <sc-if value="{{ p.hasSlot }}" hint-placeholder-val="{{ true }}">
+            <img src="assets/emblem-clay.png" alt="" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;opacity:.22">
+          </sc-if>
+        </div>
+        <div style="margin-top:18px;display:flex;flex-direction:column;gap:5px">
+          <div style="font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:#1F3A28;line-height:1.15">{{ p.name }}</div>
+          <div style="font-size:13px;color:#8a9686;line-height:1.45">{{ p.detail }}</div>
+        </div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;border-top:1px solid rgba(31,58,40,.09)">
+          <sc-for list="{{ p.sizeRows }}" as="s" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(31,58,40,.07)">
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14px;color:#1F3A28;font-weight:500">{{ s.l }}</div>
+                <sc-if value="{{ s.hasG }}" hint-placeholder-val="">
+                  <div style="font-size:12px;color:#8a9686;margin-top:1px">{{ s.g }}</div>
+                </sc-if>
+              </div>
+              <span style="font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:#1F3A28;flex:none">{{ s.priceLabel }}</span>
+              <sc-if value="{{ s.quote }}" hint-placeholder-val="">
+                <a href="Flor%20Tierra%20Contacto.dc.html" style="flex:none;text-decoration:none;font-size:12.5px;color:#B5532E;font-weight:600;white-space:nowrap;border:1.5px solid rgba(181,83,46,.4);border-radius:30px;padding:7px 12px;transition:background .18s ease" style-hover="background:rgba(181,83,46,.08)">Cotizar →</a>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ============ BRAND STORY ============ -->
+<section style="background:#DCE7C8;padding:0">
+  <div class="stack" style="max-width:1320px;margin:0 auto;display:flex;align-items:stretch;min-height:560px">
+    <div style="width:48%;position:relative;padding:clamp(24px,4vw,40px) clamp(20px,3vw,40px) clamp(24px,4vw,40px) clamp(24px,4vw,48px);display:flex;align-items:center">
+      <img class="story-img" src="slot-img/ft-story.webp" alt="" style="width:100%;height:auto;border-radius:24px;object-fit:contain;display:block">
+    </div>
+    <div style="width:52%;display:flex;align-items:center;padding:clamp(48px,7vw,80px) clamp(24px,4vw,48px) clamp(48px,7vw,80px) clamp(28px,5vw,72px)">
+      <div style="max-width:none">
+        <div style="font-family:'Fraunces',serif; font-style:italic; font-size:25px; letter-spacing:0; color: #B5532E; font-weight: 500">Nuestra historia</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:clamp(30px,4.5vw,44px);font-weight:500;color:#1F3A28;line-height:1.1;margin-top:18px;letter-spacing:-.01em">De momento a misión</h2>
+        <p style="font-size:17px;line-height:1.7;color:#3a4a38;margin-top:22px;font-weight:300">Fundada en mayo de 2017, después de que una de las socias tuvo un padecimiento que la dejó diabética, Flor Tierra surge con la visión de ofrecer snacks y botanas saludables, sin azúcar ni conservadores, y que al mismo tiempo sean muy ricos y nutritivos.</p>
+        <p style="font-size:17px;line-height:1.7;color:#3a4a38;margin-top:16px;font-weight:300">Son productos 100% artesanales, cuidadosamente elaborados por sus fundadoras, bajo la firme creencia de que una buena nutrición es la base fundamental de la salud.</p>
+        <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;display:inline-block;margin-top:30px;background:transparent;color:#1F3A28;border:1.5px solid rgba(31,58,40,.32);padding:14px 26px;border-radius:40px;font-size:15px;font-weight:500;cursor:pointer;transition:background .2s ease,transform .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease" style-hover="background:rgba(181,83,46,.08);transform:translateY(-2px) scale(1.02);color:#B5532E;border-color:#B5532E;box-shadow:0 8px 20px rgba(13,20,14,.18)">Conoce a Flor Tierra →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section style="background:#1F3A28;padding:96px 48px;position:relative;overflow:hidden">
+  <div class="tnav-row" style="max-width:980px;margin:0 auto;display:flex;align-items:center;gap:28px;min-height:380px">
+    <button onClick="{{ tiPrev }}" aria-label="Anterior" class="tnav-arrow" style="flex:none;width:50px;height:50px;border-radius:50%;border:1.5px solid rgba(246,243,234,.3);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .2s ease" style-hover="background:rgba(246,243,234,.12);transform:scale(1.06)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <div style="flex:1;text-align:center">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="#C8A37A" style="margin:0 auto"><path d="M7 7c-2.2 0-4 1.8-4 4s1.8 4 4 4c0 2-1 3-3 4 4 0 7-3 7-8 0-2.8-1.8-4-4-4zm10 0c-2.2 0-4 1.8-4 4s1.8 4 4 4c0 2-1 3-3 4 4 0 7-3 7-8 0-2.8-1.8-4-4-4z"></path></svg>
+      <p style="font-family:'Fraunces',serif;font-size:clamp(22px,4vw,32px);line-height:1.4;font-weight:400;font-style:italic;color:#F6F3EA;margin-top:24px;text-wrap:pretty;will-change:transform,opacity;animation:{{ slideAnim }}" key="{{ slideKey }}">{{ currentTestimonial.quote }}</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:30px;max-width:420px;margin-left:auto;margin-right:auto">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="5">
+          <button onClick="{{ t.go }}" aria-label="Testimonio" style="width:9px;height:9px;border-radius:50%;border:none;cursor:pointer;padding:0;background:{{ t.dotBg }};transition:background .2s ease"></button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:30px">
+        <button onClick="{{ tiPrev }}" aria-label="Anterior" class="tnav-arrow-m" style="flex:none;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(246,243,234,.3);background:transparent;cursor:pointer;align-items:center;justify-content:center;transition:background .2s ease,transform .2s ease" style-hover="background:rgba(246,243,234,.12);transform:scale(1.06)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:11px">
+          <div style="width:58px;height:58px;border-radius:50%;background:#C8A37A;display:flex;align-items:center;justify-content:center">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1F3A28" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"></circle><path d="M8.5 14.5a4.2 4.2 0 0 0 7 0"></path><circle cx="9" cy="10" r=".9" fill="#1F3A28" stroke="none"></circle><circle cx="15" cy="10" r=".9" fill="#1F3A28" stroke="none"></circle></svg>
+          </div>
+          <div style="font-size:15px;font-weight:500;color:#F6F3EA;letter-spacing:.02em">Cliente feliz</div>
+        </div>
+        <button onClick="{{ tiNext }}" aria-label="Siguiente" class="tnav-arrow-m" style="flex:none;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(246,243,234,.3);background:transparent;cursor:pointer;align-items:center;justify-content:center;transition:background .2s ease,transform .2s ease" style-hover="background:rgba(246,243,234,.12);transform:scale(1.06)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+      </div>
+    </div>
+    <button onClick="{{ tiNext }}" aria-label="Siguiente" class="tnav-arrow" style="flex:none;width:50px;height:50px;border-radius:50%;border:1.5px solid rgba(246,243,234,.3);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .2s ease" style-hover="background:rgba(246,243,234,.12);transform:scale(1.06)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+  </div>
+</section>
+
+<!-- ============ RECIPES ============ -->
+<section class="sec-pad" style="background:#F6F3EA;padding:104px 0 110px">
+  <div class="pad-x" style="max-width:1320px;margin:0 auto;padding:0 48px;text-align:center;margin-bottom:54px">
+    <div style="font-family:'Fraunces',serif;font-style:italic;font-size:25px;letter-spacing:0;color:#B5532E;font-weight:500;margin-bottom:14px">Inspiración</div>
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(30px,5vw,48px);font-weight:500;color:#1F3A28;line-height:1.05;letter-spacing:-.01em">Recetas con Flor Tierra</h2>
+    <p style="font-size:17px;color:#7a8a76;margin-top:14px;font-weight:300">Ideas sencillas para sacarle todo el sabor a tus mixes y granolas.</p>
+  </div>
+  <div class="pad-x grid-3 recipes-grid" style="max-width:1320px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px">
+    <sc-for list="{{ recipes }}" as="r" hint-placeholder-count="3">
+      <div onClick="{{ r.open }}" style="cursor:pointer;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 2px 4px rgba(31,58,40,.04);transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-6px);box-shadow:0 18px 40px rgba(31,58,40,.12)">
+        <sc-if value="{{ r.hasPhoto }}" hint-placeholder-val="">
+          {{ r.imgEl }}
+        </sc-if>
+        <sc-if value="{{ r.noPhoto }}" hint-placeholder-val="{{ true }}">
+          <div style="width:100%;height:240px;background:#DCE7C8;display:flex;align-items:center;justify-content:center"><img src="assets/emblem-clay.png" alt="" style="width:46px;height:46px;opacity:.22"></div>
+        </sc-if>
+        <div style="padding:24px 24px 28px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <span style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#1F3A28;background:#DCE7C8;padding:5px 11px;border-radius:20px">{{ r.tag }}</span>
+            <span style="font-size:13px;color:#8a9686">{{ r.time }}</span>
+          </div>
+          <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:#1F3A28;line-height:1.2">{{ r.title }}</h3>
+          <p style="font-size:15px;line-height:1.6;color:#7a8a76;margin-top:10px;font-weight:300">{{ r.desc }}</p>
+          <span style="display:inline-block;margin-top:18px;font-size:15px;color:#B5532E;font-weight:500">Ver receta →</span>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="text-align:center;margin-top:48px">
+    <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;display:inline-block;background:transparent;color:#1F3A28;border:1.5px solid rgba(31,58,40,.32);padding:15px 30px;border-radius:40px;font-size:15px;font-weight:500;transition:background .2s ease,transform .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease" style-hover="background:rgba(181,83,46,.08);transform:translateY(-2px) scale(1.02);color:#B5532E;border-color:#B5532E;box-shadow:0 8px 20px rgba(13,20,14,.18)">Ver todas las recetas →</a>
+  </div>
+</section>
+
+<!-- ============ EVENT TEASER ============ -->
+<section style="background:#1F3A28;padding:96px 0">
+  <div class="stack pad-x evt-row" style="max-width:1320px;margin:0 auto;padding:0 48px;display:flex;align-items:center;gap:72px">
+    <div style="flex:1;max-width:480px">
+      <div style="font-family:'Fraunces',serif;font-style:italic;font-size:25px;letter-spacing:0;color:#C8A37A;font-weight:500">Contrata para tu evento</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(30px,4.6vw,46px);font-weight:500;color:#F6F3EA;line-height:1.08;margin-top:18px;letter-spacing:-.01em">Mesas de snacks que tus invitados van a recordar.</h2>
+      <p style="font-size:17px;line-height:1.7;color:#cdd8c6;margin-top:22px;font-weight:300">Bodas, eventos corporativos y celebraciones. Armamos barras de nueces, mixes y granolas con la presentación de Flor Tierra. Cuéntanos tu fecha y te hacemos una propuesta a la medida.</p>
+      <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;display:inline-block;margin-top:32px;background:#B5532E;color:#F6F3EA;border:none;padding:16px 30px;border-radius:40px;font-size:16px;font-weight:500;cursor:pointer;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Ver eventos pasados →</a>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;height:440px">
+      <img src="slot-img/ft-event-1.webp" alt="" style="width:100%;height:100%;grid-row:span 2;border-radius:20px;object-fit:cover;display:block">
+      <img src="slot-img/ft-event-2.webp" alt="" style="width:100%;height:100%;border-radius:20px;object-fit:cover;display:block">
+      <img src="slot-img/ft-event-3.webp" alt="" style="width:100%;height:100%;border-radius:20px;object-fit:cover;display:block">
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLAY CTA BAND ============ -->
+<section style="background:#B5532E;padding:90px 48px;position:relative;overflow:hidden">
+  <img src="assets/emblem-cream.png" style="position:absolute;left:max(-196px, calc((100vw - 760px)/2 - 380px));top:50%;transform:translateY(-50%);width:340px;opacity:.10;pointer-events:none">
+  <img src="assets/emblem-cream.png" style="position:absolute;right:max(-156px, calc((100vw - 760px)/2 - 340px));top:50%;transform:translateY(-50%);width:300px;opacity:.10;pointer-events:none">
+  <div style="max-width:760px;margin:0 auto;text-align:center;position:relative">
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(32px,5vw,50px);font-weight:500;color:#F6F3EA;line-height:1.08;letter-spacing:-.01em">Recibe Flor Tierra en tu casa.</h2>
+    <p style="font-size:18px;line-height:1.6;color:#f3e3d6;margin-top:18px;font-weight:300">Envíos a todo México. Pide en línea y recíbelo fresco, hecho a mano.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px">
+      <a href="https://wa.me/528100000000" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#F6F3EA;color:#1F3A28;border:none;padding:17px 34px;border-radius:40px;font-size:16px;font-weight:600;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease" style-hover="transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18);background:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="#1F3A28"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.2-1.4A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.7 0 1.3z"></path></svg>Ordenar por Whatsapp</a>
+      <a href="https://instagram.com/flortierramty" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:transparent;color:#F6F3EA;padding:17px 30px;border-radius:40px;font-size:16px;font-weight:500;border:1.5px solid rgba(246,243,234,.4);cursor:pointer;transition:border-color .2s ease,transform .2s ease,background .2s ease,box-shadow .2s ease" style-hover="border-color:#F6F3EA;transform:translateY(-2px) scale(1.02);background:rgba(246,243,234,.1);box-shadow:0 8px 20px rgba(13,20,14,.18)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#F6F3EA" stroke="none"></circle></svg>Ordenar por Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#1F3A28;padding:74px 48px 36px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap">
+    <div style="max-width:300px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="assets/emblem-cream.png" style="width:34px;height:34px;display:block">
+        <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#F6F3EA">FLOR TIERRA</span>
+      </div>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:18px;font-weight:300">Botanas artesanales sin azúcar añadida. Hechas a mano en Monterrey, enviadas a todo México.</p>
+      <div style="display:flex;gap:12px;margin-top:22px">
+        <a href="https://instagram.com/flortierramty" target="_blank" aria-label="Instagram" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,243,234,.22);display:flex;align-items:center;justify-content:center;transition:background .18s ease" style-hover="background:rgba(246,243,234,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#F6F3EA" stroke="none"></circle></svg></a>
+        <a href="https://wa.me/528100000000" target="_blank" aria-label="WhatsApp" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,243,234,.22);display:flex;align-items:center;justify-content:center;transition:background .18s ease" style-hover="background:rgba(246,243,234,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="#F6F3EA"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.2-1.4A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.7 0 1.3z"></path></svg></a>
+      </div>
+    </div>
+    <div style="display:flex;gap:72px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Tienda</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6;transition:color .18s ease" style-hover="color:#F6F3EA">Todos los productos</a>
+          <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6;transition:color .18s ease" style-hover="color:#F6F3EA">Recetas</a>
+          <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6;transition:color .18s ease" style-hover="color:#F6F3EA">Eventos</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Empresa</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6;transition:color .18s ease" style-hover="color:#F6F3EA">Nosotros</a>
+          <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6;transition:color .18s ease" style-hover="color:#F6F3EA">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:42px auto 0;padding-top:26px;border-top:1px solid rgba(246,243,234,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <span style="font-size:13.5px;color:#7e8f79">© 2026 Flor Tierra. Hecho con cariño en Monterrey, México.</span>
+  </div>
+</footer>
+
+<!-- ============ RECIPE DETAIL MODAL ============ -->
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="">
+  <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:110;background:rgba(13,20,14,.5);display:flex;align-items:center;justify-content:center;padding:clamp(12px,4vw,40px)">
+    <div onClick="{{ stop }}" class="no-sb" style="background:#F6F3EA;border-radius:28px;max-width:920px;width:100%;max-height:88vh;overflow-y:auto;animation:modalIn .26s cubic-bezier(.4,0,.2,1);position:relative">
+      <button onClick="{{ closeModal }}" aria-label="Cerrar" style="position:absolute;top:20px;right:20px;z-index:3;width:40px;height:40px;border-radius:50%;border:none;background:rgba(246,243,234,.9);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(31,58,40,.12)" style-hover="background:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F3A28" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      <sc-if value="{{ sel.hasPhoto }}" hint-placeholder-val="">
+        {{ sel.imgEl }}
+      </sc-if>
+      <sc-if value="{{ sel.noPhoto }}" hint-placeholder-val="{{ true }}">
+        <div style="width:100%;height:320px;background:#DCE7C8;display:flex;align-items:center;justify-content:center"><img src="assets/emblem-clay.png" alt="" style="width:54px;height:54px;opacity:.22"></div>
+      </sc-if>
+      <div style="padding:40px 48px 48px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+          <span style="background:#DCE7C8;color:#1F3A28;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:20px">{{ sel.tag }}</span>
+          <span style="font-size:14px;color:#8a9686">{{ sel.time }} · {{ sel.serves }}</span>
+        </div>
+        <h2 style="font-family:'Fraunces',serif;font-size:38px;font-weight:600;color:#1F3A28;line-height:1.08">{{ sel.title }}</h2>
+        <p style="font-size:16px;line-height:1.7;color:#3a4a38;margin-top:14px;font-weight:300">{{ sel.desc }}</p>
+        <div style="display:flex;gap:48px;flex-wrap:wrap;margin-top:32px">
+          <div style="flex:1;min-width:240px">
+            <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#7a8a76;font-weight:500;margin-bottom:14px">Ingredientes</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ sel.ingredients }}" as="ing" hint-placeholder-count="4">
+                <div style="display:flex;align-items:flex-start;gap:11px;font-size:15px;color:#3a4a38">
+                  <span style="flex:none;width:7px;height:7px;border-radius:50%;background:#C8A37A;margin-top:7px"></span>{{ ing }}
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="flex:1.4;min-width:300px">
+            <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#7a8a76;font-weight:500;margin-bottom:14px">Preparación</div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <sc-for list="{{ sel.steps }}" as="st" hint-placeholder-count="3">
+                <div style="display:flex;align-items:flex-start;gap:14px">
+                  <span style="flex:none;width:28px;height:28px;border-radius:50%;background:#1F3A28;color:#F6F3EA;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">{{ st.n }}</span>
+                  <p style="font-size:15px;line-height:1.6;color:#3a4a38;font-weight:300;padding-top:3px">{{ st.t }}</p>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+
+
+
+
+
+
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.productsRef = React.createRef();
+    this.quoteRef = React.createRef();
+    this.state = { cart: this.loadCart(), cartOpen: false, ti: 0, tdir: 1, tkey: 0, toast: '', selId: null };
+    // Preview of the Productos catalogue — same items & full size ranges.
+    this.productList = [
+      { id:'almendra-e',   name:'Almendra enchilada', detail:'Chile artesanal · sin azúcar añadida', slotId:'ft-p-almendra-e',   tag:'Best seller', imgSrc:'slot-img/ft-c-almendra.webp',
+        sizes:[{l:'Bolsa Kilo',g:'1000 g',p:490},{l:'Bolsa Grande',g:'350 g',p:190},{l:'Bolsa Chica',g:'220 g',p:125}] },
+      { id:'mixgourmet-e', name:'Mix Gourmet',        detail:'Almendra, cashew y nuez enchilada',    slotId:'ft-p-mixgourmet',   tag:'',            imgSrc:'slot-img/ft-c-mixgourmet.webp',
+        sizes:[{l:'Bolsa Kilo',g:'1000 g',p:560},{l:'Bolsa Grande',g:'315 g',p:220},{l:'Bolsa Chica',g:'210 g',p:160}] },
+      { id:'caramelizado', name:'Mix Caramelizado',   detail:'Endulzado con monkfruit',              slotId:'ft-p-caramelizado', tag:'',            imgSrc:'slot-img/ft-c-caramelizado.webp',
+        sizes:[{l:'Bolsa Kilo',g:'1000 g',p:950},{l:'Bolsa Grande',g:'300 g',p:330},{l:'Bolsa Chica',g:'200 g',p:220}] },
+      { id:'topping',      name:'Topping Artesanal',  detail:'Aceite de oliva extra virgen',         slotId:'ft-p-topping',      tag:'',            imgSrc:'assets/topping.jpg',
+        sizes:[{l:'Frasco',g:'200 g',p:130}] },
+      { id:'granola',      name:'Granola Gourmet',    detail:'Frutos secos y chocolate sin azúcar',  slotId:'ft-p-granola',      tag:'',            imgSrc:'slot-img/ft-granola-gourmet.png',
+        sizes:[{l:'Bolsa Kilo',g:'1000 g',p:930},{l:'Bolsa Grande',g:'340 g',p:320},{l:'Bolsa Chica',g:'240 g',p:230}] },
+      { id:'garapinada',   name:'Nuez garapiñada',    detail:'Endulzada con monkfruit',              slotId:'ft-p-garapinada',   tag:'',            imgSrc:'slot-img/ft-p-garapinada.jpeg',
+        sizes:[{l:'Bolsa Kilo',g:'1000 g',p:780},{l:'Bolsa Grande',g:'250 g',p:290},{l:'Bolsa Chica',g:'160 g',p:185}] },
+      { id:'cashew-e',     name:'Cashew enchilado',   detail:'Nuez de la India, cremosa y crujiente',slotId:'ft-p-cashew',       tag:'',            imgSrc:'slot-img/ft-p-cashew.jpeg',
+        sizes:[{l:'Bolsa Kilo',g:'1000 g',p:590},{l:'Bolsa Grande',g:'320 g',p:225},{l:'Bolsa Chica',g:'220 g',p:180}] },
+    ];
+    // Full recipe data (mirrors the Recetas page) so the homepage can open
+    // each recipe's detail directly in a modal.
+    this.recipesData = [
+      { id:'salmon', title:'Salmón Gourmet', tag:'Comida', time:'20 min', serves:'2 porciones', slotId:'ft-r-salmon',
+        desc:'Filetes dorados al punto exacto, bañados con Topping Artesanal.',
+        ingredients:['Filetes de salmón','Topping Artesanal Flor Tierra','Sal, pimienta y paprika'],
+        steps:['Condimenta los filetes de salmón por ambos lados a tu gusto con sal, pimienta y paprika.','En un sartén precalentado a fuego medio-alto, agrega un poco del aceite de oliva del Topping Artesanal.','Dora los filetes de 3 a 4 minutos aproximadamente. Recuerda que el punto exacto de cocción es cuando, al picar su carne, se separa en capas.','Sírvelos y agrega la cantidad de Topping Artesanal según tu gusto. Asegúrate de que el Topping esté a temperatura ambiente.','Consejo: te recomendamos acompañarlo con verduras asadas y arroz blanco.'] },
+      { id:'ensalada-ricardo', title:'Ensalada Ricardo', tag:'Comida', time:'20 min', serves:'2 porciones', slotId:'ft-r-ensalada-ricardo',
+        desc:'¿Cansado de las típicas ensaladas? Prueba ésta.',
+        ingredients:['Lechuga según tu preferencia','Tomate cherry','Queso feta','Fajitas de pollo','Topping Artesanal Flor Tierra','Sal y pimienta'],
+        steps:['Desinfecta la lechuga.','Condimenta las fajitas de pollo con sal y pimienta.','Dora el pollo con un poco del aceite de oliva del Topping Artesanal en un sartén precalentado.','Sobre una cama de lechuga, coloca los tomates cherry, el queso feta y las fajitas de pollo.','Agrega Topping Artesanal al gusto.','¡Disfrútala!'] },
+      { id:'avocado', title:'Avocado Toast', tag:'Desayuno', time:'15 min', serves:'1 porción', slotId:'ft-r-avocado',
+        desc:'¿Con prisa? Un desayuno rápido y delicioso.',
+        ingredients:['Pan','Aguacate','Huevo','Jamón de pavo','Tomate cherry','Topping Artesanal Flor Tierra','Sal y pimienta'],
+        steps:['Pon a tostar el pan.','Corta el aguacate en rebanadas.','En un plato, agrega un huevo con un poco de sal y pimienta y mezcla bien.','En un sartén a fuego medio, calienta un poco del aceite de oliva del Topping Artesanal. Agrega el jamón de pavo y revuelve.','Incorpora la mezcla de huevo al sartén, revolviendo constantemente para crear los huevos revueltos.','En cuanto el huevo esté cocido, retíralo del fuego.','Para servir, unta el aguacate sobre la rebanada de pan tostado y coloca encima el huevo revuelto.','Para finalizar, agrega tomate cherry y Topping Artesanal Flor Tierra al gusto.','Consejo: también puedes hacerlo con huevo pochado o estrellado.'] },
+      { id:'nieve-pepino', title:'Nieve de Pepino', tag:'Snack', time:'10 min + congelar', serves:'2 porciones', slotId:'ft-r-nieve-pepino',
+        desc:'Un snack saludable y refrescante para el calor.',
+        ingredients:['Pepino','Limón','Monkfruit','Pizca de sal','Salsa Tamarindo','Tajín'],
+        steps:['Corta un pepino pelado en cuadritos, quítale las semillas y ponlo en una bolsa en el congelador.','Ya congelado, ponlo en la licuadora junto con el jugo de un limón (o más, si te gusta más ácido), una cucharadita de Monkfruit y una pizca de sal.','Licúa y sirve en un plato hondo o copa para helado.','Para finalizar, agrega Salsa Tamarindo y Tajín al gusto.'] },
+      { id:'manzana-sana', title:'Manzana Sana', tag:'Snack', time:'5 min', serves:'1 porción', slotId:'ft-r-manzana-sana',
+        desc:'Para las prisas, un snack atractivo, delicioso y nutritivo.',
+        ingredients:['Manzana','Jamaica enchilada','Salsa Tamarindo','Limón','Tajín'],
+        steps:['Corta la manzana en rodajas o rebanadas y acomódalas en un plato.','Agrega jamaica enchilada a todos los pedazos de manzana.','Finalmente, sazónalos con Salsa Tamarindo, limón y Tajín al gusto.'] },
+      { id:'brie-hojaldre', title:'Queso Brie en Hojaldre', tag:'Botana', time:'25 min', serves:'6 porciones', slotId:'ft-r-brie-hojaldre',
+        desc:'Sorprende a tus invitados con esta botana elegante y deliciosa.',
+        ingredients:['Queso brie','Masa de hojaldre','Topping Artesanal Flor Tierra'],
+        steps:['Extiende un poco la masa de hojaldre y cubre el queso con ella.','Hornea el queso a 180 °C (350 °F) por 20 minutos o más, dependiendo de lo doradito que lo quieras.','Báñalo con la cantidad que gustes de Topping Artesanal Flor Tierra.','Consejo: lo puedes acompañar con las galletas de tu preferencia o con tostaditas Melba.'] },
+      { id:'pepinos-locos', title:'Pepinos Locos', tag:'Snack', time:'10 min', serves:'2 porciones', slotId:'ft-r-pepinos-locos',
+        desc:'¿Tienes antojo de algo saludable? Aquí lo tienes.',
+        ingredients:['Pepino','Jamaica enchilada','Salsa Tamarindo','Limón','Tajín'],
+        steps:['Corta el pepino en rodajas o tiras.','Báñalas con Salsa Tamarindo.','Agrega jamaica enchilada encima.','Finalmente, sazónalos con limón y Tajín al gusto.'] },
+      { id:'flautas', title:'Flautas especiales', tag:'Comida', time:'20 min', serves:'2 porciones', slotId:'ft-r-flautas',
+        desc:'Una cena gourmet sin salir de casa.',
+        ingredients:['Flautas que más te gusten','Frijoles','Crema','Topping Artesanal Flor Tierra','Lechuga'],
+        steps:['Fríe tus flautas o dóralas en el Air Fryer u horno.','Báñalas con crema y Topping Artesanal al gusto.','Acompáñalas con frijoles y ensalada.'] },
+      { id:'thai-noodles', title:'Thai Noodles', tag:'Comida', time:'25 min', serves:'2 porciones', slotId:'ft-r-thai-noodles',
+        desc:'Dale a tu pasta un sabor sorprendente.',
+        ingredients:['Pasta ángel','Pollo','Ejote','Aceite de ajonjolí','Ajo','Cebolla','Topping Artesanal Flor Tierra'],
+        steps:['Dora el pollo en trozos pequeños en aceite de ajonjolí y sazónalo con ajo, cebolla molida y sal.','Cuece la pasta ángel.','Agrega ejotes cocidos.','Finalmente, agrega Topping Artesanal al gusto y mézclalo con los noodles y los ejotes.'] },
+    ];
+    this.testimonialsData = [
+      { quote:'Compré 8 bolsitas de almendras para regalitos en navidad… solo dí 2, ¡las demás me las comí yo! Y ni culpa siento. Delis adictivas.' },
+      { quote:'¡Wow, deli todo!, especialmente el topping artesanal y chocobites. Buenos precios y servicio.' },
+      { quote:'¡Ya los probé y me encantaron! ¡Wow, te voy a recomendar mucho! Gracias por la muestra, están delis.' },
+      { quote:'¡Están deliciosas! Gracias, cliente frecuente yo.' },
+      { quote:'¡La mejor mesa de postres para eventos!' },
+      { quote:'Han sido un éxito las almendras más que nada.' },
+      { quote:'¡Están adictivas! En el bautizo te pido más; me fascinaron.' },
+      { quote:'¡Están deliciosas, wow!' },
+      { quote:'¡Deliciosas las almendras enchiladas! Súper recomendado.' },
+      { quote:'Me hubiera encantado conocerte cuando hice mi despedida de soltera, pero te voy a recomendar con quien necesite.' },
+      { quote:'¡Están bellos! Más hermosos de lo que esperaba. Y delis las almendras.' },
+      { quote:'¡Las nueces enchiladas que me dieron están buenísimas!' },
+      { quote:'Me gustaría saber si tienen disponible frasco con Mix de nueces enchiladas, pues me las acaban de regalar y me encantaron.' },
+      { quote:'¡Están hermosas las decoraciones! Me gustó mucho.' },
+    ];
+  }
+
+  loadCart(){ try { return JSON.parse(localStorage.getItem('ft-cart') || '[]'); } catch(e){ return []; } }
+  commit(cart, extra){
+    try { localStorage.setItem('ft-cart', JSON.stringify(cart)); } catch(e){}
+    this.setState(Object.assign({ cart }, extra || {}));
+  }
+  money(n){ return '$' + n.toLocaleString('es-MX'); }
+
+  addToCart(p){
+    const s = this.state;
+    const ex = s.cart.find(c => c.id === p.id);
+    const cart = ex
+      ? s.cart.map(c => c.id === p.id ? { ...c, qty: c.qty + 1 } : c)
+      : [...s.cart, { id:p.id, name:p.name, weight:p.weight, price:p.price, qty:1 }];
+    this.commit(cart, { toast: p.name + ' agregado al carrito' });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast:'' }), 2000);
+  }
+  addVariant(item, size, idx){
+    const vid = item.id + '-' + idx;
+    const label = item.sizes.length > 1 ? item.name + ' · ' + size.l : item.name;
+    const weight = size.g ? size.g : size.l;
+    const s = this.state;
+    const ex = s.cart.find(c => c.id === vid);
+    const cart = ex
+      ? s.cart.map(c => c.id === vid ? { ...c, qty: c.qty + 1 } : c)
+      : [...s.cart, { id:vid, name:label, weight, price:size.p, qty:1 }];
+    this.commit(cart, { toast: label + ' agregado al carrito' });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast:'' }), 2000);
+  }
+  changeQty(id, d){ this.commit(this.state.cart.map(c => c.id === id ? { ...c, qty: Math.max(1, c.qty + d) } : c)); }
+  removeItem(id){ this.commit(this.state.cart.filter(c => c.id !== id)); }
+  _layoutCarousel(){
+    const el = this.productsRef.current; if(!el) return;
+    const cs = getComputedStyle(el);
+    const padL = parseFloat(cs.paddingLeft) || 0, padR = parseFloat(cs.paddingRight) || 0;
+    const gap = 24, minCard = 248;
+    const avail = el.clientWidth - padL - padR;
+    let visible = Math.floor((avail + gap) / (minCard + gap));
+    visible = Math.max(1, Math.min(visible, this.productList.length));
+    const cardW = Math.floor((avail - (visible - 1) * gap) / visible);
+    el.style.setProperty('--ftcw', cardW + 'px');
+    this._carStride = cardW + gap;
+    // One click advances by the number of fully-visible cards; the scroll
+    // container clamps at its bounds, so when only a few cards overflow (default
+    // width) a single click lands on the far end.
+    this._carPage = visible * this._carStride;
+  }
+  scrollCar(d){
+    const el = this.productsRef.current; if(!el) return;
+    if(!this._carPage) this._layoutCarousel();
+    el.scrollBy({ left: d * this._carPage, behavior:'smooth' });
+  }
+
+  componentDidMount() {
+    this._layoutCarousel();
+    this._onResize = () => this._layoutCarousel();
+    window.addEventListener('resize', this._onResize);
+  }
+
+  goTo(i, dir) {
+    this.setState(s => ({ ti: i, tdir: dir === undefined ? (i > s.ti ? 1 : -1) : dir, tkey: s.tkey + 1 }));
+  }
+
+  componentWillUnmount() {
+    if (this._rafId) cancelAnimationFrame(this._rafId);
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onResize);
+  }
+
+  _setupNuts() {
+    const container = document.getElementById('nuts-parallax');
+    if (!container) return;
+    container.innerHTML = '';
+    if (this._rafId) cancelAnimationFrame(this._rafId);
+    // Eight separate transparent nut PNGs, placed WHOLE (never cropped) at
+    // varied sizes and positions across the panel — some bleed off-screen.
+    // Nut 4 is the large hero piece IN FRONT of the jars (z>3) with the most
+    // dramatic parallax; a couple medium pieces also sit in front; the rest
+    // are small and sit BEHIND the jars (z<3) drifting gently for depth.
+    // [ src, width(px), left%, top%, speed, baseRot, zIdx ]
+    const defs = [
+      // ── IN FRONT of jars (z>3) — sized up ~2× ──
+      ['assets/nut-4.png', 1080,   0, 30, 0.60,  -5, 6],  // large hero — most dramatic
+      ['assets/nut-1.png',  640,  44, 48, 0.46,  12, 5],  // medium front
+      ['assets/nut-2.png',  600, -16, 38, 0.50, -14, 5],  // medium front, off left edge
+      ['assets/nut-3.png',  540,  54,  0, 0.40,   9, 4],  // medium front, upper area
+      ['assets/nut-7.png',  560,  -8, -6, 0.34,   8, 4],  // fills the empty space above the carafe
+      // ── BEHIND jars (z<3) — nudged closer (bigger + livelier so they aren't too "far back") ──
+      ['assets/nut-5.png',  360,  66, 52, 0.22,  14, 2],
+      ['assets/nut-6.png',  320, -14,  2, 0.18, -11, 1],  // off left edge
+      ['assets/nut-8.png',  300,  80, 16, 0.17, -22, 1],  // off right edge
+    ];
+    this._nuts = defs.map(([src, w, lp, tp, sp, br, z], i) => {
+      const el = document.createElement('img');
+      el.src = src;
+      el.style.cssText = `position:absolute;left:${lp}%;top:${tp}%;width:${w}px;height:auto;transform-origin:center;pointer-events:none;z-index:${z};will-change:transform;`;
+      container.appendChild(el);
+      return { el, sp, br, front: z > 3, drift: (i % 2 ? 1 : -1) };
+    });
+    this._scrollY = 0;
+    this._smoothY = 0;
+    this._onScroll = () => { this._scrollY = window.scrollY; };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    const tick = (ts) => {
+      this._rafId = requestAnimationFrame(tick);
+      this._smoothY += (this._scrollY - this._smoothY) * 0.08;
+      this._nuts.forEach(({ el, sp, br, front, drift }, i) => {
+        const dy = -this._smoothY * sp;
+        const dx = Math.sin(ts * 0.0006 + i * 1.7) * (front ? 6 : 3) * drift;
+        const wobble = Math.sin(ts * 0.0005 + i * 0.9) * (front ? 2.4 : 1.1);
+        el.style.transform = `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) rotate(${(br + dy * 0.02 + wobble).toFixed(2)}deg)`;
+      });
+    };
+    this._rafId = requestAnimationFrame(tick);
+  }
+
+  renderVals(){
+    const ti = this.state.ti;
+    const products = this.productList.map(p => ({
+      name: p.name, detail: p.detail, tag: p.tag, slotId: p.slotId,
+      hasImg:  !!p.imgSrc,
+      hasSlot: !p.imgSrc,
+      imgEl: p.imgSrc ? React.createElement('img', { src: p.imgSrc, style: { width:'100%', height:'100%', objectFit:'cover', display:'block' } }) : null,
+      sizeRows: p.sizes.map((sz,idx) => ({
+        l: sz.l, g: sz.g || '', hasG: !!sz.g,
+        priceLabel: sz.range ? sz.range : this.money(sz.p),
+        canAdd: !sz.range, quote: !!sz.range,
+        add: () => this.addVariant(p, sz, idx),
+      })),
+    }));
+    const cart = this.state.cart.map(c => ({
+      ...c, letter: c.name.charAt(0), priceLabel: this.money(c.price * c.qty),
+      inc: () => this.changeQty(c.id, 1), dec: () => this.changeQty(c.id, -1), remove: () => this.removeItem(c.id),
+    }));
+    const count = this.state.cart.reduce((a,c) => a + c.qty, 0);
+    const subtotal = this.state.cart.reduce((a,c) => a + c.price * c.qty, 0);
+    const testimonials = this.testimonialsData.map((x,i) => ({ ...x, go: () => this.goTo(i), dotBg: i === ti ? '#C8A37A' : 'rgba(246,243,234,.3)' }));
+    const tn = this.testimonialsData.length;
+    const recipeImg = {
+      'salmon':'slot-img/ft-r-salmon.webp',
+      'ensalada-ricardo':'slot-img/recipe-ensalada-ricardo.png','avocado':'slot-img/recipe-avocado.png',
+      'nieve-pepino':'slot-img/recipe-nieve-pepino.png','manzana-sana':'slot-img/recipe-manzana-sana.png',
+      'brie-hojaldre':'slot-img/recipe-brie-hojaldre.png','pepinos-locos':'slot-img/recipe-pepinos-locos.png',
+      'flautas':'slot-img/recipe-flautas.png','thai-noodles':'slot-img/recipe-thai-noodles.png',
+    };
+    const mkImg = (src,h,alt) => src ? React.createElement('img',{src,alt:alt||'',style:{width:'100%',height:h,objectFit:'cover',display:'block'}}) : null;
+    const rImg = r => ({ ...r, hasPhoto: !!recipeImg[r.id], noPhoto: !recipeImg[r.id], imgEl: mkImg(recipeImg[r.id],'240px',r.title) });
+    const recipes = this.recipesData.slice(0, 3).map(r => ({ ...rImg(r), open: () => this.setState({ selId: r.id }) }));
+    const selR = this.recipesData.find(r => r.id === this.state.selId);
+    const sel = selR ? { ...rImg(selR), imgEl: mkImg(recipeImg[selR.id],'320px',selR.title), steps: selR.steps.map((t,i)=>({ n:i+1, t })) } : null;
+    return {
+      products, cart, recipes, testimonials,
+      sel, modalOpen: !!selR,
+      closeModal: () => this.setState({ selId:null }), stop: (e) => e.stopPropagation(),
+      cartCount: count, hasItems: count > 0, isEmpty: count === 0,
+      subtotalLabel: this.money(subtotal),
+      currentTestimonial: this.testimonialsData[ti],
+      slideKey: 'q' + this.state.tkey,
+      slideAnim: (this.state.tdir === -1 ? 'tSlidePrev' : 'tSlideNext') + ' .45s cubic-bezier(.22,.61,.36,1) both',
+      toast: this.state.toast,
+      drawerTransform: this.state.cartOpen ? 'translateX(0)' : 'translateX(100%)',
+      overlayOpacity: this.state.cartOpen ? '1' : '0',
+      overlayPointer: this.state.cartOpen ? 'auto' : 'none',
+      openCart: () => this.setState({ cartOpen:true }),
+      closeCart: () => this.setState({ cartOpen:false }),
+      scrollProductsLeft: () => this.scrollCar(-1),
+      scrollProductsRight: () => this.scrollCar(1),
+      tiPrev: () => this.goTo((ti - 1 + tn) % tn, -1),
+      tiNext: () => this.goTo((ti + 1) % tn, 1),
+      quoteRef: this.quoteRef,
+      productsRef: this.productsRef,
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  @font-face{font-family:'Moon Flower';src:url('assets/MoonFlower.ttf') format('truetype');font-display:swap}
+    body{background:#F6F3EA;font-family:'Jost',sans-serif;color:#1F3A28;-webkit-font-smoothing:antialiased}
+  .no-sb::-webkit-scrollbar{display:none}
+  .no-sb{scrollbar-width:none}
+  input,select,textarea{font-family:'Jost',sans-serif}
+  input::placeholder,textarea::placeholder{color:rgba(246,243,234,.5)}
+  @keyframes toastIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+  @keyframes floatUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  .nav-burger{display:none}
+  .nav-mpanel{display:none}
+  .nav-desktop a{transition:color .18s ease}
+  .nav-mpanel a{padding:14px 4px;font-size:16px;border-bottom:1px solid rgba(31,58,40,.07)}
+  @media(max-width:920px){
+    .nav-desktop{display:none!important}
+    .nav-burger{display:flex!important}
+    #ftnav:checked~.nav-mpanel{display:flex!important}
+    .nav-inner{padding-left:22px!important;padding-right:22px!important}
+  }
+  @media(max-width:860px){
+    .contact-pane{min-width:100%!important;flex-basis:100%!important;padding-left:26px!important;padding-right:26px!important}
+    .grid-2{grid-template-columns:1fr!important}
+    .contact-form-inner{margin:0!important}
+    .contact-info-inner{margin:0!important}
+  }
+  @keyframes navUnderline{from{background-size:0% 2px}to{background-size:100% 2px}}
+</style>
+</helmet>
+
+<div style="overflow-x:clip">
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:60;background:rgba(246,243,234,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(31,58,40,.10)">
+  <div class="nav-inner" style="max-width:1320px;margin:0 auto;padding:0 48px;height:74px;display:flex;align-items:center;justify-content:space-between">
+    <a href="Flor%20Tierra%20Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px">
+      <img src="assets/emblem-green.png" style="width:32px;height:32px;display:block">
+      <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#1F3A28">FLOR TIERRA</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px">
+      <div class="nav-desktop" style="display:flex;align-items:center;gap:36px">
+        <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Productos</a>
+        <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Recetas</a>
+        <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Eventos</a>
+        <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Nosotros</a>
+        <span style="width:1px;height:20px;background:rgba(31,58,40,.16)"></span>
+        <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#F6F3EA;font-weight:500;background:#B5532E;padding:9px 20px;border-radius:40px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Contacto</a>
+      </div>
+      
+      <label for="ftnav" class="nav-burger" aria-label="Menú" style="width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(31,58,40,.18);align-items:center;justify-content:center;cursor:pointer;flex:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3A28" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </label>
+    </div>
+  </div>
+  <input id="ftnav" type="checkbox" hidden style="display:none">
+  <div class="nav-mpanel" style="flex-direction:column;position:absolute;top:74px;left:0;right:0;background:#F6F3EA;border-bottom:1px solid rgba(31,58,40,.12);padding:6px 24px 16px;box-shadow:0 16px 28px rgba(31,58,40,.10)">
+    <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;color:#1F3A28">Productos</a>
+    <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;color:#1F3A28">Recetas</a>
+    <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;color:#1F3A28">Eventos</a>
+    <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;color:#1F3A28">Nosotros</a>
+    <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;color:#F6F3EA;background:#B5532E;border:none;border-radius:30px;padding:13px 18px;font-weight:600;text-align:center;margin-top:10px">Contacto</a>
+  </div>
+</nav>
+
+<!-- SPLIT CONTACT -->
+<section data-screen-label="Contacto" style="display:flex;flex-wrap:wrap;min-height:760px">
+  <!-- left clay info -->
+  <div class="contact-pane" style="flex:1;min-width:360px;background:#B5532E;padding:clamp(48px,6vw,80px) clamp(26px,4vw,64px);position:relative;overflow:hidden;display:flex;align-items:center">
+    <img src="assets/emblem-cream.png" style="position:absolute;right:-90px;bottom:-90px;width:340px;opacity:.10;pointer-events:none">
+    <div class="contact-info-inner" style="position:relative;max-width:600px;width:100%;margin:0 0 0 auto">
+      <h1 style="font-family:'Fraunces',serif;font-size:clamp(40px,7vw,62px);font-weight:500;color:#F6F3EA;line-height:1.02;letter-spacing:-.015em">Hablemos.</h1>
+      <p style="font-size:18px;line-height:1.7;color:#f3e3d6;margin-top:18px;font-weight:300">¿Quieres hacer un pedido, tienes dudas sobre un producto o buscas colaborar con nosotros?</p>
+      <p style="font-size:18px;line-height:1.7;color:#f3e3d6;margin-top:14px;font-weight:300">Escríbenos por aquí, o directo por WhatsApp o Instagram—te respondemos lo antes posible.</p>
+      <div style="margin-top:42px;display:flex;flex-direction:column;gap:24px">
+        <a href="mailto:hola@flortierra.mx" style="text-decoration:none;display:flex;align-items:center;gap:16px">
+          <div style="flex:none;width:46px;height:46px;border-radius:50%;background:rgba(246,243,234,.16);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+          <div><div style="font-size:13px;color:#f0cdba;letter-spacing:.04em">Correo</div><div style="font-size:16px;color:#F6F3EA;font-weight:500">hola@flortierra.mx</div></div>
+        </a>
+        <a href="https://wa.me/528100000000" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:16px">
+          <div style="flex:none;width:46px;height:46px;border-radius:50%;background:rgba(246,243,234,.16);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F6F3EA"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.2-1.4A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.7 0 1.3z"/></svg></div>
+          <div><div style="font-size:13px;color:#f0cdba;letter-spacing:.04em">WhatsApp</div><div style="font-size:16px;color:#F6F3EA;font-weight:500">+52 81 0000 0000</div></div>
+        </a>
+        <a href="https://instagram.com/flortierramty" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:16px">
+          <div style="flex:none;width:46px;height:46px;border-radius:50%;background:rgba(246,243,234,.16);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#F6F3EA" stroke="none"/></svg></div>
+          <div><div style="font-size:13px;color:#f0cdba;letter-spacing:.04em">Instagram</div><div style="font-size:16px;color:#F6F3EA;font-weight:500">@flortierramty</div></div>
+        </a>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="flex:none;width:46px;height:46px;border-radius:50%;background:rgba(246,243,234,.16);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5-7-11a7 7 0 0 1 14 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
+          <div><div style="font-size:13px;color:#f0cdba;letter-spacing:.04em">Dónde estamos</div><div style="font-size:16px;color:#F6F3EA;font-weight:500">Monterrey, Nuevo León</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- right forest form -->
+  <div class="contact-pane" style="flex:1;min-width:360px;background:#1F3A28;padding:clamp(48px,6vw,80px) clamp(26px,4vw,64px);display:flex;align-items:center">
+    <div class="contact-form-inner" style="width:100%;max-width:600px;margin:0 auto 0 0">
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <div style="font-family:'Fraunces',serif;font-style:italic;font-size:25px;letter-spacing:0;color:#C8A37A;font-weight:500;margin-bottom:12px">Envíanos un mensaje</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:38px;font-weight:500;color:#F6F3EA;line-height:1.08;margin-bottom:30px">Cuéntanos qué buscas y lo armamos juntos</h2>
+        <form onSubmit="{{ submit }}">
+          <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <input name="nombre" required placeholder="Nombre*" style="padding:15px 16px;border:1.5px solid rgba(246,243,234,.25);border-radius:12px;font-size:15px;color:#F6F3EA;background:rgba(246,243,234,.06);outline:none" style-focus="border-color:#C8A37A">
+            <input name="apellido" placeholder="Apellido" style="padding:15px 16px;border:1.5px solid rgba(246,243,234,.25);border-radius:12px;font-size:15px;color:#F6F3EA;background:rgba(246,243,234,.06);outline:none" style-focus="border-color:#C8A37A">
+            <input name="email" type="email" required placeholder="Correo*" style="padding:15px 16px;border:1.5px solid rgba(246,243,234,.25);border-radius:12px;font-size:15px;color:#F6F3EA;background:rgba(246,243,234,.06);outline:none" style-focus="border-color:#C8A37A">
+            <select name="asunto" required style="padding:15px 16px;border:1.5px solid rgba(246,243,234,.25);border-radius:12px;font-size:15px;color:#F6F3EA;background:rgba(246,243,234,.06);outline:none" style-focus="border-color:#C8A37A">
+              <option value="" style="color:#1F3A28">Asunto*</option>
+              <option style="color:#1F3A28">Quiero hacer un pedido</option>
+              <option style="color:#1F3A28">Dudas sobre un producto</option>
+              <option style="color:#1F3A28">Colaboraciones</option>
+              <option style="color:#1F3A28">Otro</option>
+            </select>
+          </div>
+          <textarea name="mensaje" required rows="5" placeholder="Tu mensaje*" style="width:100%;margin-top:16px;padding:15px 16px;border:1.5px solid rgba(246,243,234,.25);border-radius:12px;font-size:15px;color:#F6F3EA;background:rgba(246,243,234,.06);outline:none;resize:vertical" style-focus="border-color:#C8A37A"></textarea>
+          <button type="submit" style="margin-top:22px;background:#B5532E;color:#F6F3EA;border:none;padding:16px 34px;border-radius:40px;font-size:16px;font-weight:600;cursor:pointer;font-family:'Jost',sans-serif;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Enviar mensaje →</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ submitted }}" hint-placeholder-val="">
+        <div style="text-align:center;animation:floatUp .4s ease">
+          <div style="width:84px;height:84px;border-radius:50%;background:#B5532E;display:flex;align-items:center;justify-content:center;margin:0 auto 26px"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h2 style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:#F6F3EA;line-height:1.1">¡Mensaje enviado!</h2>
+          <p style="font-size:17px;line-height:1.7;color:#cdd8c6;margin-top:14px;font-weight:300">Gracias por escribirnos, {{ submittedName }}. Te responderemos en un máximo de un día hábil.</p>
+          <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;display:inline-block;margin-top:28px;background:#F6F3EA;color:#1F3A28;padding:15px 30px;border-radius:40px;font-size:15px;font-weight:600">Ver productos →</a>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#1F3A28;padding:74px 48px 36px;border-top:1px solid rgba(246,243,234,.12)">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap">
+    <div style="max-width:300px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="assets/emblem-cream.png" style="width:34px;height:34px;display:block">
+        <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#F6F3EA">FLOR TIERRA</span>
+      </div>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:18px;font-weight:300">Botanas artesanales sin azúcar añadida. Hechas a mano en Monterrey, enviadas a todo México.</p>
+    </div>
+    <div style="display:flex;gap:64px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Tienda</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Todos los productos</a>
+          <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Recetas</a>
+          <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Eventos</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Empresa</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Nosotros</a>
+          <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:42px auto 0;padding-top:26px;border-top:1px solid rgba(246,243,234,.12)">
+    <span style="font-size:13.5px;color:#7e8f79">© 2026 Flor Tierra. Hecho con cariño en Monterrey, México.</span>
+  </div>
+</footer>
+
+
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){ super(props); this.state = { cart: this.loadCart(), cartOpen:false, submitted:false, submittedName:'' }; }
+  loadCart(){ try { return JSON.parse(localStorage.getItem('ft-cart')||'[]'); } catch(e){ return []; } }
+  money(n){ return '$' + n.toLocaleString('es-MX'); }
+  changeQty(id,d){ const cart=this.state.cart.map(c=>c.id===id?{...c,qty:Math.max(1,c.qty+d)}:c); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
+  removeItem(id){ const cart=this.state.cart.filter(c=>c.id!==id); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
+  submit(e){
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const name = (data.get('nombre')||'').toString().trim().split(' ')[0] || '';
+    this.setState({ submitted:true, submittedName:name });
+  }
+  renderVals(){
+    const cart = this.state.cart.map(c => ({ ...c, letter:c.name.charAt(0), priceLabel:this.money(c.price*c.qty), inc:()=>this.changeQty(c.id,1), dec:()=>this.changeQty(c.id,-1), remove:()=>this.removeItem(c.id) }));
+    const count = this.state.cart.reduce((a,c)=>a+c.qty,0);
+    const subtotal = this.state.cart.reduce((a,c)=>a+c.price*c.qty,0);
+    return {
+      cart, cartCount:count, hasItems:count>0, isEmpty:count===0, subtotalLabel:this.money(subtotal),
+      submitted:this.state.submitted, notSubmitted:!this.state.submitted, submittedName:this.state.submittedName,
+      submit:(e)=>this.submit(e),
+      drawerTransform: this.state.cartOpen ? 'translateX(0)' : 'translateX(100%)',
+      overlayOpacity: this.state.cartOpen ? '1' : '0', overlayPointer: this.state.cartOpen ? 'auto' : 'none',
+      openCart:()=>this.setState({cartOpen:true}), closeCart:()=>this.setState({cartOpen:false}),
+    };
+  }
+}
+</script>
+</body>
+</html>

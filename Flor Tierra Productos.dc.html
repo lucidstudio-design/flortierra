@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  @font-face{font-family:'Moon Flower';src:url('assets/MoonFlower.ttf') format('truetype');font-display:swap}
+    html{scroll-behavior:smooth}
+  body{background:#F6F3EA;font-family:'Jost',sans-serif;color:#1F3A28;-webkit-font-smoothing:antialiased}
+  .no-sb::-webkit-scrollbar{display:none}
+  .no-sb{scrollbar-width:none}
+  @keyframes toastIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+  .nav-burger{display:none}
+  .nav-mpanel{display:none}
+  .nav-desktop a{transition:color .18s ease}
+  .nav-mpanel a{padding:14px 4px;font-size:16px;border-bottom:1px solid rgba(31,58,40,.07)}
+  @media(max-width:920px){
+    .nav-desktop{display:none!important}
+    .nav-burger{display:flex!important}
+    #ftnav:checked~.nav-mpanel{display:flex!important}
+    .nav-inner{padding-left:22px!important;padding-right:22px!important}
+  }
+  @media(max-width:740px){
+    .pad-x{padding-left:22px!important;padding-right:22px!important}
+  }
+  /* Header illustration: slides off-screen as the viewport narrows, then drops
+     below the text so it never overlaps the copy. */
+  @media(max-width:1180px){
+    .prod-head-inner{ gap:0!important }
+    .prod-head-text{ flex-basis:100%!important; padding-bottom:32px!important }
+    .prod-illus-wrap{ flex-basis:100%!important; justify-content:center!important }
+    .prod-illus{ height:auto!important; width:100%!important; max-width:none!important; margin-bottom:-3vw!important }
+  }
+  @media(max-width:560px){
+    .prod-cta-row{ flex-wrap:wrap!important }
+  }
+</style>
+</helmet>
+
+<div style="overflow-x:clip">
+
+<!-- ============ STICKY NAV ============ -->
+<nav style="position:sticky;top:0;z-index:60;background:rgba(246,243,234,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(31,58,40,.10)">
+  <div class="nav-inner" style="max-width:1320px;margin:0 auto;padding:0 48px;height:74px;display:flex;align-items:center;justify-content:space-between">
+    <a href="Flor%20Tierra%20Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;cursor:pointer">
+      <img src="assets/emblem-green.png" style="width:32px;height:32px;display:block">
+      <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#1F3A28">FLOR TIERRA</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px">
+      <div class="nav-desktop" style="display:flex;align-items:center;gap:36px">
+        <a href="Flor%20Tierra%20Productos.dc.html" class="nav-active" style="text-decoration:none;font-size:15px;color:#B5532E;font-weight:600;padding-bottom:4px;background-image:linear-gradient(#B5532E,#B5532E);background-position:0 100%;background-repeat:no-repeat;background-size:100% 2px">Productos</a>
+        <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Recetas</a>
+        <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Eventos</a>
+        <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;font-size:15px;color:#1F3A28" style-hover="color:#B5532E">Nosotros</a>
+        <span style="width:1px;height:20px;background:rgba(31,58,40,.16)"></span>
+        <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#F6F3EA;font-weight:500;background:#B5532E;padding:9px 20px;border-radius:40px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Contacto</a>
+      </div>
+      <label for="ftnav" class="nav-burger" aria-label="Menú" style="width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(31,58,40,.18);align-items:center;justify-content:center;cursor:pointer;flex:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3A28" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </label>
+    </div>
+  </div>
+  <input id="ftnav" type="checkbox" hidden style="display:none">
+  <div class="nav-mpanel" style="flex-direction:column;position:absolute;top:74px;left:0;right:0;background:#F6F3EA;border-bottom:1px solid rgba(31,58,40,.12);padding:6px 24px 16px;box-shadow:0 16px 28px rgba(31,58,40,.10)">
+    <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;color:#B5532E;font-weight:500">Productos</a>
+    <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;color:#1F3A28">Recetas</a>
+    <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;color:#1F3A28">Eventos</a>
+    <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;color:#1F3A28">Nosotros</a>
+    <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;color:#F6F3EA;background:#B5532E;border:none;border-radius:30px;padding:13px 18px;font-weight:600;text-align:center;margin-top:10px">Contacto</a>
+  </div>
+</nav>
+
+<section data-screen-label="Productos" class="prod-head" style="background:#DCE7C8;position:relative;overflow:hidden">
+  <div class="prod-head-inner" style="display:flex;align-items:stretch;gap:24px;flex-wrap:wrap">
+    <div class="prod-head-text" style="flex:1 1 600px;min-width:0;padding:72px 24px 64px;padding-left:max(24px, calc((100vw - 1320px)/2 + 48px));position:relative;z-index:2">
+      <div style="font-family:'Fraunces',serif;font-style:italic;font-size:25px;letter-spacing:0;color:#B5532E;font-weight:500">Catálogo Flor Tierra</div>
+      <h1 style="font-family:'Fraunces',serif;font-size:clamp(38px,7vw,62px);font-weight:500;color:#1F3A28;line-height:1.02;letter-spacing:-.015em;margin-top:14px">Nuestros productos</h1>
+      <p style="font-size:18px;line-height:1.6;color:#3a4a38;margin-top:14px;max-width:600px;font-weight:300">Todo hecho a mano en Monterrey, sin azúcar añadida. Explora nuestra línea para consumo, los regalitos personalizados y las mesas de botanas para eventos.</p>
+      <div class="prod-cta-row" style="display:flex;flex-wrap:nowrap;gap:14px;margin-top:28px">
+        <a href="https://wa.me/528123932653" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;background:#B5532E;color:#F6F3EA;padding:15px 28px;border-radius:40px;font-size:16px;font-weight:600;cursor:pointer;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F6F3EA"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.2-1.4A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.7 0 1.3z"/></svg>Ordenar por Whatsapp</a>
+        <a href="https://instagram.com/flortierramty" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;background:transparent;color:#1F3A28;padding:15px 26px;border-radius:40px;font-size:16px;font-weight:500;border:1.5px solid rgba(31,58,40,.32);cursor:pointer;transition:background .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="border-color:#1F3A28;background:rgba(31,58,40,.05);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F3A28" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#1F3A28" stroke="none"/></svg>Ordenar por Instagram</a>
+      </div>
+    </div>
+    <div class="prod-illus-wrap" style="flex:1 1 440px;min-width:0;display:flex;align-items:flex-end;justify-content:flex-start;overflow:hidden">
+      <img class="prod-illus" src="uploads/FlorTierra Sunflowers-457ccbfc.png" style="height:clamp(300px,30vw,430px);width:auto;max-width:none;pointer-events:none;display:block">
+    </div>
+  </div>
+</section>
+<section class="pad-x" style="background:#F6F3EA;padding:30px 48px 6px;position:sticky;top:74px;z-index:40;border-bottom:1px solid rgba(31,58,40,.08)">
+  <div style="max-width:1320px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;padding-bottom:22px">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+      <button onClick="{{ t.select }}" style="border:1.5px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};padding:11px 24px;border-radius:30px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Jost',sans-serif;transition:background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease" style-hover="transform:translateY(-2px);box-shadow:0 6px 16px rgba(13,20,14,.14)">{{ t.label }}</button>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ============ PRODUCT CONTENT ============ -->
+<section class="pad-x" style="background:#F6F3EA;padding:48px 48px 110px">
+  <div style="max-width:1320px;margin:0 auto">
+    <!-- intro for active section -->
+    <div style="max-width:680px;margin-bottom:8px">
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(26px,4vw,38px);font-weight:500;color:#1F3A28;line-height:1.08;letter-spacing:-.01em">{{ activeTitle }}</h2>
+      <p style="font-size:16.5px;line-height:1.6;color:#5a6a58;margin-top:12px;font-weight:300">{{ activeDesc }}</p>
+      <sc-if value="{{ activeNote }}" hint-placeholder-val="">
+        <div style="display:inline-flex;align-items:center;gap:9px;margin-top:18px;background:#DCE7C8;color:#33502f;border-radius:30px;padding:9px 16px;font-size:13.5px;font-weight:500">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#33502f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          {{ activeNote }}
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- blocks (subsections) -->
+    <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="2">
+      <div style="margin-top:46px">
+        <sc-if value="{{ b.heading }}" hint-placeholder-val="">
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+            <h3 style="font-family:'Fraunces',serif;font-size:23px;font-weight:600;color:#1F3A28;flex:none">{{ b.heading }}</h3>
+            <span style="flex:1;height:1px;background:rgba(31,58,40,.12)"></span>
+            <sc-if value="{{ b.sub }}" hint-placeholder-val="">
+              <span style="font-size:13.5px;color:#8a9686;flex:none">{{ b.sub }}</span>
+            </sc-if>
+          </div>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));gap:24px;align-items:start">
+          <sc-for list="{{ b.items }}" as="p" hint-placeholder-count="4">
+            <div style="background:#fff;border-radius:20px;padding:20px;box-shadow:0 2px 4px rgba(31,58,40,.04);transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;height:100%" style-hover="transform:translateY(-6px);box-shadow:0 18px 38px rgba(31,58,40,.12)">
+              <sc-if value="{{ p.hasImage }}" hint-placeholder-val="{{ true }}">
+                <div style="position:relative;height:200px;border-radius:14px;background:#DCE7C8;overflow:hidden;margin-bottom:18px">
+                  <sc-if value="{{ p.tag }}" hint-placeholder-val="">
+                    <span style="position:absolute;top:12px;left:12px;z-index:2;background:#B5532E;color:#F6F3EA;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:20px">{{ p.tag }}</span>
+                  </sc-if>
+                  <sc-if value="{{ p.imgSrc }}" hint-placeholder-val="">
+                    {{ p.imgEl }}
+                  </sc-if>
+                  <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}">
+                    <img src="assets/emblem-clay.png" alt="" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;opacity:.22">
+                  </sc-if>
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.badge }}" hint-placeholder-val="">
+                <span style="align-self:flex-start;background:#DCE7C8;color:#33502f;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:20px;margin-bottom:12px">{{ p.badge }}</span>
+              </sc-if>
+              <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:#1F3A28;line-height:1.18">{{ p.name }}</div>
+              <sc-if value="{{ p.desc }}" hint-placeholder-val="">
+                <div style="font-size:13.5px;color:#8a9686;margin-top:6px;line-height:1.5;font-weight:300">{{ p.desc }}</div>
+              </sc-if>
+              <div style="margin-top:16px;display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(31,58,40,.09)">
+                <sc-for list="{{ p.sizeRows }}" as="s" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(31,58,40,.07)">
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:14.5px;color:#1F3A28;font-weight:500">{{ s.l }}</div>
+                      <sc-if value="{{ s.hasG }}" hint-placeholder-val="">
+                        <div style="font-size:12.5px;color:#8a9686;margin-top:1px">{{ s.g }}</div>
+                      </sc-if>
+                    </div>
+                    <span style="font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:#1F3A28;flex:none">{{ s.priceLabel }}</span>
+                    <sc-if value="{{ s.quote }}" hint-placeholder-val="">
+                      <a href="Flor%20Tierra%20Contacto.dc.html" style="flex:none;text-decoration:none;font-size:13px;color:#B5532E;font-weight:600;white-space:nowrap;border:1.5px solid rgba(181,83,46,.4);border-radius:30px;padding:7px 13px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:rgba(181,83,46,.08);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Cotizar →</a>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#1F3A28;padding:74px 48px 36px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap">
+    <div style="max-width:300px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="assets/emblem-cream.png" style="width:34px;height:34px;display:block">
+        <span style="font-weight:500;letter-spacing:.32em;font-size:16px;color:#F6F3EA">FLOR TIERRA</span>
+      </div>
+      <p style="font-size:15px;line-height:1.65;color:#9fb09a;margin-top:18px;font-weight:300">Botanas artesanales sin azúcar añadida. Hechas a mano en Monterrey, enviadas a todo México.</p>
+      <div style="display:flex;gap:12px;margin-top:22px">
+        <a href="https://instagram.com/flortierramty" target="_blank" aria-label="Instagram" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,243,234,.22);display:flex;align-items:center;justify-content:center;transition:background .18s ease" style-hover="background:rgba(246,243,234,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#F6F3EA" stroke="none"/></svg></a>
+        <a href="https://wa.me/528123932653" target="_blank" aria-label="WhatsApp" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,243,234,.22);display:flex;align-items:center;justify-content:center;transition:background .18s ease" style-hover="background:rgba(246,243,234,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="#F6F3EA"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.2-1.4A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.5-4-4.7-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.7 0 1.3z"/></svg></a>
+      </div>
+    </div>
+    <div style="display:flex;gap:64px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Tienda</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Productos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Todos los productos</a>
+          <a href="Flor%20Tierra%20Recetas.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Recetas</a>
+          <a href="Flor%20Tierra%20Eventos.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Eventos</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#C8A37A;font-weight:500;margin-bottom:18px">Empresa</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="Flor%20Tierra%20Nosotros.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Nosotros</a>
+          <a href="Flor%20Tierra%20Contacto.dc.html" style="text-decoration:none;font-size:15px;color:#cdd8c6" style-hover="color:#F6F3EA">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:42px auto 0;padding-top:26px;border-top:1px solid rgba(246,243,234,.12)">
+    <span style="font-size:13.5px;color:#7e8f79">© 2026 Flor Tierra. Hecho con cariño en Monterrey, México.</span>
+  </div>
+</footer>
+
+
+
+
+
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { cart: this.loadCart(), cartOpen:false, toast:'', section:'consumo' };
+
+    // ===== CONSUMO (catálogo de consumo) =====
+    this.consumo = {
+      title:'Para consumo',
+      desc:'Nuestra línea de la casa: nueces, mixes y dulces sin azúcar añadida, en bolsa kilo, grande o chica para que la disfrutes cuando quieras.',
+      note:'',
+      groups:[
+        { heading:'Enchilados', sub:'Con chile artesanal', items:[
+          { id:'almendra-e', name:'Almendra enchilada', img:true, slot:'ft-c-almendra', tag:'Best seller', desc:'Almendra entera cubierta de chile artesanal.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:490},{l:'Bolsa Grande',g:'350 g',p:190},{l:'Bolsa Chica',g:'220 g',p:125}] },
+          { id:'mix-e', name:'Mix enchilado', img:true, slot:'ft-c-mixe', desc:'Nuez, almendra, cacahuate, pepita de calabaza y semilla de girasol.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:455},{l:'Bolsa Grande',g:'350 g',p:180},{l:'Bolsa Chica',g:'200 g',p:115}] },
+          { id:'cashew-e', name:'Cashew enchilado', img:true, slot:'ft-c-cashew', desc:'Nuez de la India enchilada, cremosa y crujiente.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:590},{l:'Bolsa Grande',g:'320 g',p:225},{l:'Bolsa Chica',g:'220 g',p:180}] },
+          { id:'nuez-e', name:'Nuez enchilada', img:true, slot:'ft-c-nueze', desc:'Mitades de nuez con chile artesanal.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:600},{l:'Bolsa Grande',g:'250 g',p:210},{l:'Bolsa Chica',g:'160 g',p:150}] },
+          { id:'mixgourmet-e', name:'Mix Gourmet', img:true, slot:'ft-c-mixgourmet', desc:'Almendra, cashew y nuez enchilada.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:560},{l:'Bolsa Grande',g:'315 g',p:220},{l:'Bolsa Chica',g:'210 g',p:160}] },
+        ]},
+        { heading:'Dulces', sub:'Endulzados con monkfruit', items:[
+          { id:'garapinada', name:'Nuez garapiñada', img:true, slot:'ft-c-garapinada', desc:'Nuez garapiñada endulzada con monkfruit.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:780},{l:'Bolsa Grande',g:'250 g',p:290},{l:'Bolsa Chica',g:'160 g',p:185}] },
+          { id:'caramelizado', name:'Mix Caramelizado', img:true, slot:'ft-c-caramelizado', desc:'Cashew y nuez endulzada con monkfruit, con chispas de chocolate sin azúcar.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:950},{l:'Bolsa Grande',g:'300 g',p:330},{l:'Bolsa Chica',g:'200 g',p:220}] },
+          { id:'granola', name:'Granola Gourmet', img:true, slot:'ft-c-granola', desc:'Macadamia, nuez, cashew, pistache, almendra, pepita, cacahuate, coco y chispas de chocolate y peanut butter sin azúcar.',
+            sizes:[{l:'Bolsa Kilo',g:'1000 g',p:930},{l:'Bolsa Grande',g:'340 g',p:320},{l:'Bolsa Chica',g:'240 g',p:230}] },
+          { id:'topping', name:'Topping Artesanal', img:true, slot:'ft-c-topping', desc:'Cacahuate, pepita de calabaza, ajonjolí, mezcla de chiles y aceite de oliva extra virgen.',
+            sizes:[{l:'Frasco',g:'200 g',p:130}] },
+          { id:'dubai', name:'Dubai Cookies', img:true, slot:'ft-c-dubai', desc:'Galleta con pistachella (kadayif, pistache y chocolate blanco), cubierta de spread de cocoa y avellana.',
+            sizes:[{l:'Paquete',g:'5 piezas',p:255}] },
+        ]},
+      ]
+    };
+
+    // ===== REGALOS =====
+    this.regalos = {
+      title:'Regalos',
+      desc:'Detalles personalizados para bautizos, bodas, baby showers y cualquier ocasión. Elige la presentación y nosotros la llenamos con tus nueces favoritas.',
+      note:'El costo incluye etiqueta personalizada y adorno según la ocasión.',
+      groups:[
+        { heading:'', sub:'', items:[
+          { id:'cajita', name:'Cajita para eventos', desc:'Cajita decorativa con etiqueta personalizada. Pregunta por las opciones disponibles.', sizes:[{l:'Con producto',g:'30 g',p:40}] },
+          { id:'bolsita', name:'Bolsita', desc:'Bolsita transparente con moño y etiqueta.', sizes:[{l:'Con producto',g:'40 g',p:45}] },
+          { id:'frasco-petite', name:'Frasco petite', desc:'Frasco de vidrio pequeño con tapa.', sizes:[{l:'Con producto',g:'50 g',p:55}] },
+          { id:'caja-ventana', name:'Caja cuadrada ventana chica', desc:'Caja con ventana, 7 × 7 × 3 cm.', sizes:[{l:'Con producto',g:'60 g',p:70}] },
+          { id:'cubo-acrilico', name:'Cubo acrílico', desc:'Cubo de acrílico transparente, 6 × 6 × 6 cm.', sizes:[{l:'Con producto',g:'90 g',p:80}] },
+          { id:'frasco-plus', name:'Frasco petite plus', desc:'Frasco de vidrio mediano con tapa.', sizes:[{l:'Con producto',g:'100 g',p:85}] },
+          { id:'hexagonal', name:'Hexagonal chico', desc:'Frasco hexagonal de vidrio.', sizes:[{l:'Con producto',g:'90 g',p:90}] },
+          { id:'globo', name:'Globo', desc:'Frasco globo de vidrio con moño.', sizes:[{l:'Con producto',g:'140 g',p:115}] },
+          { id:'gourmet-chico', name:'Gourmet chico', desc:'Presentación gourmet en frasco de vidrio.', sizes:[{l:'Con producto',g:'140 g',p:115}] },
+          { id:'caja-piedra', name:'Caja acrílico con piedra', desc:'Caja de acrílico con base de piedra natural.', sizes:[{l:'Cuadrada',g:'10 × 10 × 4.5 cm',p:290},{l:'Rectangular',g:'19 × 11 × 3.5 cm',p:320}] },
+          { id:'jarra-vaso', name:'Jarra de vidrio con vaso', desc:'Jarra de vidrio acompañada de vaso.', sizes:[{l:'Con producto',g:'350 g',p:380}] },
+          { id:'tabla-vidrio', name:'Tabla de vidrio templado', desc:'Tabla de servicio en vidrio templado, 20 × 30 cm.', sizes:[{l:'Tabla',g:'',p:280}] },
+          { id:'tabla-madera', name:'Tabla de madera', desc:'Tabla de madera con cuchillo. Incluye Topping Artesanal.', sizes:[{l:'Tabla',g:'',p:350}] },
+          { id:'decantador', name:'Decantador', desc:'Incluye 250 g de almendra + 200 g de Mix Enchilado + 80 g de Nuez Enchilada.', sizes:[{l:'Decantador',g:'',p:370}] },
+          { id:'maceta', name:'Maceta chica de mármol', desc:'Blanca o negra, con suculenta o almendras.', sizes:[{l:'Maceta',g:'',p:260}] },
+          { id:'copon', name:'Copón botanero', desc:'De vidrio soplado. Incluye 50 g de almendra + 50 g de nuez de la India + 50 g de nuez enchilada.', sizes:[{l:'Vidrio soplado',g:'',range:'$300 – $600'}] },
+          { id:'jarra-soplado', name:'Jarra de vidrio soplado', desc:'Pieza de vidrio soplado en varios colores.', sizes:[{l:'Varios colores',g:'',p:250}] },
+        ]}
+      ]
+    };
+
+    // ===== MESA DE BOTANAS =====
+    this.botanas = {
+      title:'Mesa de botanas',
+      desc:'Barras de botanas para eventos, armadas con la presentación de Flor Tierra. Precios por porción individual; el mínimo varía por evento — con gusto te cotizamos.',
+      note:'Precio por porción individual. Montaje, decoración y salsas se cotizan aparte.',
+      groups:[
+        { heading:'Frutal', sub:'', items:[
+          { id:'b-brocheta-fruta', name:'Brocheta de frutas', img:true, slot:'ft-b-brocheta-fruta', desc:'Fruta fresca de temporada.', sizes:[{l:'Porción individual',g:'',p:27}] },
+          { id:'b-crudites', name:'Crudités', img:true, slot:'ft-b-crudites', desc:'Con laja de tamarindo. Jícama, pepino y zanahoria con limón.', sizes:[{l:'Porción individual',g:'',p:27}] },
+          { id:'b-tamarindo', name:'Dulce de tamarindo natural', img:true, slot:'ft-b-tamarindo', desc:'Tamarindo natural, hecho en casa.', sizes:[{l:'Porción individual',g:'',p:18}] },
+          { id:'b-fruta-deshidratada', name:'Mix de fruta deshidratada', img:true, slot:'ft-b-fruta-deshidratada', desc:'Enchilada.', sizes:[{l:'Porción individual',g:'',p:30}] },
+        ]},
+        { heading:'Botana seca', sub:'', items:[
+          { id:'b-papitas', name:'Papitas', img:true, slot:'ft-b-papitas', desc:'Con cacahuate y golos.', sizes:[{l:'Porción individual',g:'',p:35}] },
+          { id:'b-fritos', name:'Mezcla de fritos', img:true, slot:'ft-b-fritos', desc:'Y conchitas con golos.', sizes:[{l:'Porción individual',g:'',p:25}] },
+          { id:'b-chicharron', name:'Chicharrón de harina', img:true, slot:'ft-b-chicharron', desc:'Con chile.', sizes:[{l:'Porción individual',g:'',p:15}] },
+          { id:'b-pubmix', name:'Pub mix', img:true, slot:'ft-b-pubmix', desc:'Combinación de botanas saladas crujientes.', sizes:[{l:'Porción individual',g:'',p:28}] },
+        ]},
+        { heading:'Frutos secos', sub:'', items:[
+          { id:'b-mixgourmet', name:'Mix gourmet', img:true, slot:'ft-b-mixgourmet', desc:'De almendras y cashews enchilados.', sizes:[{l:'Porción individual',g:'',p:32}] },
+          { id:'b-mixcacahuate', name:'Mix de cacahuates', img:true, slot:'ft-b-mixcacahuate', desc:'Enchilado, japonés y salado.', sizes:[{l:'Porción individual',g:'',p:25}] },
+          { id:'b-cantinero', name:'Mix cantinero', img:true, slot:'ft-b-cantinero', desc:'Nuestra mezcla cantinera de la casa.', sizes:[{l:'Porción individual',g:'',p:25}] },
+          { id:'b-berrynuts', name:'Berry nuts', img:true, slot:'ft-b-berrynuts', desc:'Clusters de granola con yogurt griego.', sizes:[{l:'Porción individual',g:'',p:30}] },
+        ]},
+        { heading:'Chocolate', sub:'', items:[
+          { id:'b-cono-kinder', name:'Cono Kinder Sorpresa', img:true, slot:'ft-b-cono-kinder', desc:'Cono relleno con Kinder Sorpresa.', sizes:[{l:'Porción individual',g:'',p:45}] },
+          { id:'b-pasas', name:'Pasas o almendras', img:true, slot:'ft-b-pasas', desc:'Con chocolate.', sizes:[{l:'Porción individual',g:'',p:30}] },
+          { id:'b-chipcookie', name:'Chocolate chip cookie', img:true, slot:'ft-b-chipcookie', desc:'Galletas con chispas de chocolate.', sizes:[{l:'Porción individual',g:'',p:25}] },
+          { id:'b-waffle', name:'Galleta waffle', img:true, slot:'ft-b-waffle', desc:'Con chocolate y chispas.', sizes:[{l:'Porción individual',g:'',p:18}] },
+          { id:'b-smore', name:'Smore on a stick', img:true, slot:'ft-b-smore', desc:'Bombón cubierto de chocolate y chispas.', sizes:[{l:'Porción individual',g:'',p:23}] },
+          { id:'b-ferrero', name:'Cono ferrero', img:true, slot:'ft-b-ferrero', desc:'Ferrero, pasas y almendras con chocolate.', sizes:[{l:'Porción individual',g:'',p:38}] },
+        ]},
+        { heading:'Dulce', sub:'', items:[
+          { id:'b-palomitas', name:'Palomitas Gourmet', img:true, slot:'ft-b-palomitas', desc:'Caramelizadas y queso cheddar.', sizes:[{l:'Porción individual',g:'',p:25}] },
+          { id:'b-brocheta-gomita-d', name:'Brochetas de gomitas', img:true, slot:'ft-b-brocheta-gomita-d', desc:'Gomitas dulces.', sizes:[{l:'Porción individual',g:'',p:28}] },
+          { id:'b-dulceleche', name:'Palitos de dulce de leche', img:true, slot:'ft-b-dulceleche', desc:'Clásico palito de dulce de leche.', sizes:[{l:'Porción individual',g:'',p:20}] },
+          { id:'b-skittles', name:'Skittles', img:true, slot:'ft-b-skittles', desc:'Porción de Skittles.', sizes:[{l:'Porción individual',g:'',p:25}] },
+          { id:'b-gomitas', name:'Gomitas', img:true, slot:'ft-b-gomitas', desc:'De gusanitos.', sizes:[{l:'Porción individual',g:'',p:22}] },
+          { id:'b-mms', name:'M&Ms', img:true, slot:'ft-b-mms', desc:'Porción de M&Ms.', sizes:[{l:'Porción individual',g:'',p:28}] },
+          { id:'b-xtreme', name:'Xtreme bites', img:true, slot:'ft-b-xtreme', desc:'Gomitas ácidas.', sizes:[{l:'Porción individual',g:'',p:28}] },
+          { id:'b-minibombones', name:'Minibombones', img:true, slot:'ft-b-minibombones', desc:'Porción de minibombones.', sizes:[{l:'Porción individual',g:'',p:18}] },
+        ]},
+        { heading:'Enchilados', sub:'', items:[
+          { id:'b-obleas', name:'Obleas', img:true, slot:'ft-b-obleas', desc:'Rellenas de tamarindo.', sizes:[{l:'Porción individual',g:'',p:18}] },
+          { id:'b-panditas', name:'Panditas enchilados', img:true, slot:'ft-b-panditas', desc:'O ahogados.', sizes:[{l:'Porción individual',g:'',p:23}] },
+          { id:'b-tutsipop', name:'Tutsi Pop', img:true, slot:'ft-b-tutsipop', desc:'O paleta de sandía con Miguelito.', sizes:[{l:'Porción individual',g:'',p:18}] },
+          { id:'b-brocheta-gomita-e', name:'Brochetas de gomitas', img:true, slot:'ft-b-brocheta-gomita-e', desc:'Enchiladas.', sizes:[{l:'Porción individual',g:'',p:28}] },
+        ]},
+        { heading:'Botana gourmet', sub:'', items:[
+          { id:'b-copa', name:'Copa individual', img:true, slot:'ft-b-copa', desc:'De carnes frías.', sizes:[{l:'Porción individual',g:'',p:85}] },
+          { id:'b-caprese', name:'Brocheta caprese', img:true, slot:'ft-b-caprese', desc:'Con tomate cherry y queso.', sizes:[{l:'Porción individual',g:'',p:22}] },
+          { id:'b-salami', name:'Brocheta de salami', img:true, slot:'ft-b-salami', desc:'Con aceitunas y queso.', sizes:[{l:'Porción individual',g:'',p:28}] },
+          { id:'b-philadelphia', name:'Queso Philadelphia', img:true, slot:'ft-b-philadelphia', desc:'Con Topping Artesanal. Incluye paquete de galletas.', sizes:[{l:'Pieza',g:'',p:200}] },
+        ]},
+        { heading:'Montaje', sub:'', items:[
+          { id:'b-montaje', name:'Montaje, decoración y salsas', desc:'No incluye mesa ni mantel. Varía según ubicación y número de personas.', sizes:[{l:'Servicio de evento',g:'',range:'$500 – $2,000'}] },
+        ]},
+      ]
+    };
+
+    // Permanent product images (baked from uploads — drag-and-drop removed).
+    this.imgMap = {
+      // consumo
+      'almendra-e':'slot-img/ft-c-almendra.webp', 'mix-e':'slot-img/ft-c-mixe.webp',
+      'cashew-e':'slot-img/ft-c-cashew.webp', 'nuez-e':'slot-img/ft-c-nueze.webp',
+      'mixgourmet-e':'slot-img/ft-c-mixgourmet.webp', 'garapinada':'slot-img/ft-c-garapinada.webp',
+      'caramelizado':'slot-img/ft-c-caramelizado.webp', 'granola':'slot-img/ft-granola-gourmet.png',
+      'topping':'slot-img/ft-c-topping.webp', 'dubai':'slot-img/ft-c-dubai.webp',
+      // botanas (special cases)
+      'b-obleas':'slot-img/ft-c-obleas.png', 'b-montaje':'slot-img/ft-img-b-montaje.webp',
+    };
+    ['brocheta-fruta','crudites','tamarindo','fruta-deshidratada','papitas','fritos','chicharron','pubmix',
+     'mixgourmet','mixcacahuate','cantinero','berrynuts','cono-kinder','pasas','chipcookie','waffle','smore',
+     'ferrero','palomitas','brocheta-gomita-d','dulceleche','skittles','gomitas','mms','xtreme','minibombones',
+     'panditas','tutsipop','brocheta-gomita-e','copa','caprese','salami','philadelphia']
+      .forEach(x => this.imgMap['b-'+x] = 'slot-img/ft-b-'+x+'.webp');
+    ['cajita','bolsita','caja-ventana','cubo-acrilico','frasco-plus','hexagonal','globo',
+     'gourmet-chico','caja-piedra','tabla-vidrio','tabla-madera','decantador','maceta','copon','jarra-soplado']
+      .forEach(x => this.imgMap[x] = 'slot-img/ft-img-'+x+'.webp');
+    // Real product photos provided by the client
+    this.imgMap['frasco-petite'] = 'slot-img/ft-frasco-petite.png';
+    this.imgMap['jarra-vaso'] = 'slot-img/ft-jarra-vidrio.png';
+    this.sectionsMap = { consumo:this.consumo, regalos:this.regalos, botanas:this.botanas };
+    this.tabDefs = [['consumo','Para consumo'],['regalos','Regalos'],['botanas','Mesa de botanas']];
+  }
+
+  loadCart(){ try { return JSON.parse(localStorage.getItem('ft-cart')||'[]'); } catch(e){ return []; } }
+  commit(cart, extra){ try { localStorage.setItem('ft-cart', JSON.stringify(cart)); } catch(e){} this.setState(Object.assign({cart}, extra||{})); }
+  money(n){ return '$' + n.toLocaleString('es-MX'); }
+
+  addVariant(item, size, idx){
+    const vid = item.id + '-' + idx;
+    const label = item.sizes.length > 1 ? item.name + ' · ' + size.l : item.name;
+    const weight = size.g ? size.g : size.l;
+    const s = this.state;
+    const ex = s.cart.find(c => c.id === vid);
+    const cart = ex
+      ? s.cart.map(c => c.id === vid ? { ...c, qty: c.qty + 1 } : c)
+      : [...s.cart, { id:vid, name:label, weight, price:size.p, qty:1 }];
+    this.commit(cart, { toast: label + ' agregado al carrito' });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({toast:''}), 2000);
+  }
+  changeQty(id,d){ this.commit(this.state.cart.map(c => c.id===id ? {...c, qty:Math.max(1,c.qty+d)} : c)); }
+  removeItem(id){ this.commit(this.state.cart.filter(c => c.id!==id)); }
+
+  renderVals(){
+    const sec = this.sectionsMap[this.state.section];
+    const tabs = this.tabDefs.map(([id,label]) => {
+      const active = id === this.state.section;
+      return { label, select:()=>this.setState({section:id}),
+        bg: active ? '#1F3A28' : 'transparent', color: active ? '#F6F3EA' : '#1F3A28',
+        border: active ? '#1F3A28' : 'rgba(31,58,40,.22)' };
+    });
+    const blocks = sec.groups.map(g => ({
+      heading: g.heading,
+      sub: g.sub,
+      items: g.items.map(it => ({
+        name: it.name,
+        desc: it.desc || '',
+        hasImage: it.img !== false,
+        imgSrc: this.imgMap[it.id] || '',
+        imgEl: this.imgMap[it.id] ? React.createElement('img',{src:this.imgMap[it.id],alt:it.name,style:{width:'100%',height:'100%',objectFit:'cover',display:'block'}}) : null,
+        noImg: !this.imgMap[it.id],
+        slot: it.slot || ('ft-img-' + it.id),
+        tag: it.tag || '',
+        badge: (!it.img && it.sizes.length>1) ? '' : '',
+        sizeRows: it.sizes.map((sz,idx) => ({
+          l: sz.l,
+          g: sz.g || '',
+          hasG: !!sz.g,
+          priceLabel: sz.range ? sz.range : this.money(sz.p),
+          canAdd: !sz.range,
+          quote: !!sz.range,
+          add: ()=>this.addVariant(it, sz, idx),
+        })),
+      })),
+    }));
+
+    const cart = this.state.cart.map(c => ({ ...c, letter:c.name.charAt(0), priceLabel:this.money(c.price*c.qty), inc:()=>this.changeQty(c.id,1), dec:()=>this.changeQty(c.id,-1), remove:()=>this.removeItem(c.id) }));
+    const count = this.state.cart.reduce((a,c)=>a+c.qty,0);
+    const subtotal = this.state.cart.reduce((a,c)=>a+c.price*c.qty,0);
+
+    return {
+      tabs, blocks,
+      activeTitle: sec.title, activeDesc: sec.desc, activeNote: sec.note,
+      cart, cartCount: count, hasItems: count>0, isEmpty: count===0, subtotalLabel: this.money(subtotal),
+      toast: this.state.toast,
+      drawerTransform: this.state.cartOpen ? 'translateX(0)' : 'translateX(100%)',
+      overlayOpacity: this.state.cartOpen ? '1' : '0',
+      overlayPointer: this.state.cartOpen ? 'auto' : 'none',
+      openCart:()=>this.setState({cartOpen:true}), closeCart:()=>this.setState({cartOpen:false}),
+    };
+  }
+}
+</script>
+</body>
+</html>
