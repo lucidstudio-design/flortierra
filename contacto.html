@@ -141,7 +141,10 @@
             </select>
           </div>
           <textarea name="mensaje" required rows="5" placeholder="Tu mensaje*" style="width:100%;margin-top:16px;padding:15px 16px;border:1.5px solid rgba(246,243,234,.25);border-radius:12px;font-size:15px;color:#F6F3EA;background:rgba(246,243,234,.06);outline:none;resize:vertical" style-focus="border-color:#C8A37A"></textarea>
-          <button type="submit" style="margin-top:22px;background:#B5532E;color:#F6F3EA;border:none;padding:16px 34px;border-radius:40px;font-size:16px;font-weight:600;cursor:pointer;font-family:'Jost',sans-serif;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Enviar mensaje →</button>
+          <button type="submit" style="margin-top:22px;background:#B5532E;color:#F6F3EA;border:none;padding:16px 34px;border-radius:40px;font-size:16px;font-weight:600;cursor:pointer;font-family:'Jost',sans-serif;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">{{ sendLabel }}</button>
+          <sc-if value="{{ sendError }}" hint-placeholder-val="">
+            <p style="margin-top:14px;font-size:14.5px;line-height:1.55;color:#EBB99F">No se pudo enviar el mensaje. Intenta de nuevo, o escríbenos directo por WhatsApp.</p>
+          </sc-if>
         </form>
       </sc-if>
       <sc-if value="{{ submitted }}" hint-placeholder-val="">
@@ -196,16 +199,46 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:900}}">
 class Component extends DCLogic {
-  constructor(props){ super(props); this.state = { cart: this.loadCart(), cartOpen:false, submitted:false, submittedName:'' }; }
+  constructor(props){ super(props); this.state = { cart: this.loadCart(), cartOpen:false, submitted:false, submittedName:'', sending:false, sendError:false }; }
   loadCart(){ try { return JSON.parse(localStorage.getItem('ft-cart')||'[]'); } catch(e){ return []; } }
   money(n){ return '$' + n.toLocaleString('es-MX'); }
   changeQty(id,d){ const cart=this.state.cart.map(c=>c.id===id?{...c,qty:Math.max(1,c.qty+d)}:c); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
   removeItem(id){ const cart=this.state.cart.filter(c=>c.id!==id); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
   submit(e){
     e.preventDefault();
+    if (this.state.sending) return;
     const data = new FormData(e.target);
-    const name = (data.get('nombre')||'').toString().trim().split(' ')[0] || '';
-    this.setState({ submitted:true, submittedName:name });
+    const nombre = (data.get('nombre')||'').toString().trim();
+    const apellido = (data.get('apellido')||'').toString().trim();
+    const fullName = (nombre + ' ' + apellido).trim();
+    const email = (data.get('email')||'').toString().trim();
+    const asunto = (data.get('asunto')||'').toString();
+    const mensaje = (data.get('mensaje')||'').toString();
+    // Params are sent under several aliases so the EmailJS template can use
+    // whichever variable names it defines; unused ones are ignored.
+    const params = {
+      'Nombre': fullName, 'Correo': email, 'Asunto': asunto, 'Tu mensaje': mensaje,
+      nombre: fullName, correo: email, asunto: asunto, mensaje: mensaje,
+      name: fullName, from_name: fullName, email: email, reply_to: email,
+      subject: asunto, title: asunto, message: mensaje,
+    };
+    this.setState({ sending:true, sendError:false });
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: 'service_wsikcc9',
+        template_id: 'template_oc5k4sv',
+        user_id: '6_7DkohdW1huqhJl9',
+        template_params: params,
+      }),
+    }).then(r => {
+      if (!r.ok) throw new Error('EmailJS HTTP ' + r.status);
+      this.setState({ sending:false, submitted:true, submittedName: nombre.split(' ')[0] || '' });
+    }).catch(err => {
+      console.error('EmailJS error:', err);
+      this.setState({ sending:false, sendError:true });
+    });
   }
   renderVals(){
     const cart = this.state.cart.map(c => ({ ...c, letter:c.name.charAt(0), priceLabel:this.money(c.price*c.qty), inc:()=>this.changeQty(c.id,1), dec:()=>this.changeQty(c.id,-1), remove:()=>this.removeItem(c.id) }));
@@ -215,6 +248,8 @@ class Component extends DCLogic {
       cart, cartCount:count, hasItems:count>0, isEmpty:count===0, subtotalLabel:this.money(subtotal),
       submitted:this.state.submitted, notSubmitted:!this.state.submitted, submittedName:this.state.submittedName,
       submit:(e)=>this.submit(e),
+      sendLabel: this.state.sending ? 'Enviando…' : 'Enviar mensaje →',
+      sendError: this.state.sendError,
       drawerTransform: this.state.cartOpen ? 'translateX(0)' : 'translateX(100%)',
       overlayOpacity: this.state.cartOpen ? '1' : '0', overlayPointer: this.state.cartOpen ? 'auto' : 'none',
       openCart:()=>this.setState({cartOpen:true}), closeCart:()=>this.setState({cartOpen:false}),
