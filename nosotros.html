@@ -39,6 +39,8 @@
     .grid-3{grid-template-columns:1fr!important}
     .pad-x{padding-left:22px!important;padding-right:22px!important}
   }
+  .grid-vals>div{min-width:0}
+  .grid-vals h3,.grid-vals p{overflow-wrap:break-word;hyphens:auto}
   /* Values never collapse past 2×2 */
   @media(max-width:520px){ .grid-4{grid-template-columns:1fr!important} }
   @media (prefers-reduced-motion: no-preference){ .nav-active{animation:navUnderline .6s cubic-bezier(.6,0,.2,1)} }
