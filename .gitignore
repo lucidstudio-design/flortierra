@@ -1,0 +1,5 @@
+.DS_Store
+.claude/
+.image-slots.state.json
+.thumbnail
+screenshots/

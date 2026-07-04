@@ -540,53 +540,6 @@ class Component extends DCLogic {
     window.removeEventListener('resize', this._onResize);
   }
 
-  _setupNuts() {
-    const container = document.getElementById('nuts-parallax');
-    if (!container) return;
-    container.innerHTML = '';
-    if (this._rafId) cancelAnimationFrame(this._rafId);
-    // Eight separate transparent nut PNGs, placed WHOLE (never cropped) at
-    // varied sizes and positions across the panel — some bleed off-screen.
-    // Nut 4 is the large hero piece IN FRONT of the jars (z>3) with the most
-    // dramatic parallax; a couple medium pieces also sit in front; the rest
-    // are small and sit BEHIND the jars (z<3) drifting gently for depth.
-    // [ src, width(px), left%, top%, speed, baseRot, zIdx ]
-    const defs = [
-      // ── IN FRONT of jars (z>3) — sized up ~2× ──
-      ['assets/nut-4.png', 1080,   0, 30, 0.60,  -5, 6],  // large hero — most dramatic
-      ['assets/nut-1.png',  640,  44, 48, 0.46,  12, 5],  // medium front
-      ['assets/nut-2.png',  600, -16, 38, 0.50, -14, 5],  // medium front, off left edge
-      ['assets/nut-3.png',  540,  54,  0, 0.40,   9, 4],  // medium front, upper area
-      ['assets/nut-7.png',  560,  -8, -6, 0.34,   8, 4],  // fills the empty space above the carafe
-      // ── BEHIND jars (z<3) — nudged closer (bigger + livelier so they aren't too "far back") ──
-      ['assets/nut-5.png',  360,  66, 52, 0.22,  14, 2],
-      ['assets/nut-6.png',  320, -14,  2, 0.18, -11, 1],  // off left edge
-      ['assets/nut-8.png',  300,  80, 16, 0.17, -22, 1],  // off right edge
-    ];
-    this._nuts = defs.map(([src, w, lp, tp, sp, br, z], i) => {
-      const el = document.createElement('img');
-      el.src = src;
-      el.style.cssText = `position:absolute;left:${lp}%;top:${tp}%;width:${w}px;height:auto;transform-origin:center;pointer-events:none;z-index:${z};will-change:transform;`;
-      container.appendChild(el);
-      return { el, sp, br, front: z > 3, drift: (i % 2 ? 1 : -1) };
-    });
-    this._scrollY = 0;
-    this._smoothY = 0;
-    this._onScroll = () => { this._scrollY = window.scrollY; };
-    window.addEventListener('scroll', this._onScroll, { passive: true });
-    const tick = (ts) => {
-      this._rafId = requestAnimationFrame(tick);
-      this._smoothY += (this._scrollY - this._smoothY) * 0.08;
-      this._nuts.forEach(({ el, sp, br, front, drift }, i) => {
-        const dy = -this._smoothY * sp;
-        const dx = Math.sin(ts * 0.0006 + i * 1.7) * (front ? 6 : 3) * drift;
-        const wobble = Math.sin(ts * 0.0005 + i * 0.9) * (front ? 2.4 : 1.1);
-        el.style.transform = `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) rotate(${(br + dy * 0.02 + wobble).toFixed(2)}deg)`;
-      });
-    };
-    this._rafId = requestAnimationFrame(tick);
-  }
-
   renderVals(){
     const ti = this.state.ti;
     const products = this.productList.map(p => ({
@@ -610,11 +563,11 @@ class Component extends DCLogic {
     const testimonials = this.testimonialsData.map((x,i) => ({ ...x, go: () => this.goTo(i), dotBg: i === ti ? '#C8A37A' : 'rgba(246,243,234,.3)' }));
     const tn = this.testimonialsData.length;
     const recipeImg = {
-      'salmon':'slot-img/ft-r-salmon.webp',
-      'ensalada-ricardo':'slot-img/recipe-ensalada-ricardo.png','avocado':'slot-img/recipe-avocado.png',
-      'nieve-pepino':'slot-img/recipe-nieve-pepino.png','manzana-sana':'slot-img/recipe-manzana-sana.png',
-      'brie-hojaldre':'slot-img/recipe-brie-hojaldre.png','pepinos-locos':'slot-img/recipe-pepinos-locos.png',
-      'flautas':'slot-img/recipe-flautas.png','thai-noodles':'slot-img/recipe-thai-noodles.png',
+      'salmon':'slot-img/recipe-salmon.jpg',
+      'ensalada-ricardo':'slot-img/recipe-ensalada-ricardo.jpg','avocado':'slot-img/recipe-avocado.jpg',
+      'nieve-pepino':'slot-img/recipe-nieve-pepino.jpg','manzana-sana':'slot-img/recipe-manzana-sana.jpg',
+      'brie-hojaldre':'slot-img/recipe-brie-hojaldre.jpg','pepinos-locos':'slot-img/recipe-pepinos-locos.jpg',
+      'flautas':'slot-img/recipe-flautas.jpg','thai-noodles':'slot-img/recipe-thai-noodles.jpg',
     };
     const mkImg = (src,h,alt) => src ? React.createElement('img',{src,alt:alt||'',style:{width:'100%',height:h,objectFit:'cover',display:'block'}}) : null;
     const rImg = r => ({ ...r, hasPhoto: !!recipeImg[r.id], noPhoto: !recipeImg[r.id], imgEl: mkImg(recipeImg[r.id],'240px',r.title) });

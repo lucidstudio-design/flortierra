@@ -292,11 +292,11 @@ class Component extends DCLogic {
   removeItem(id){ const cart=this.state.cart.filter(c=>c.id!==id); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
   renderVals(){
     const RIMG = {
-      'salmon':'slot-img/ft-r-salmon.webp',
-      'ensalada-ricardo':'slot-img/recipe-ensalada-ricardo.png','avocado':'slot-img/recipe-avocado.png',
-      'nieve-pepino':'slot-img/recipe-nieve-pepino.png','manzana-sana':'slot-img/recipe-manzana-sana.png',
-      'brie-hojaldre':'slot-img/recipe-brie-hojaldre.png','pepinos-locos':'slot-img/recipe-pepinos-locos.png',
-      'flautas':'slot-img/recipe-flautas.png','thai-noodles':'slot-img/recipe-thai-noodles.png',
+      'salmon':'slot-img/recipe-salmon.jpg',
+      'ensalada-ricardo':'slot-img/recipe-ensalada-ricardo.jpg','avocado':'slot-img/recipe-avocado.jpg',
+      'nieve-pepino':'slot-img/recipe-nieve-pepino.jpg','manzana-sana':'slot-img/recipe-manzana-sana.jpg',
+      'brie-hojaldre':'slot-img/recipe-brie-hojaldre.jpg','pepinos-locos':'slot-img/recipe-pepinos-locos.jpg',
+      'flautas':'slot-img/recipe-flautas.jpg','thai-noodles':'slot-img/recipe-thai-noodles.jpg',
     };
     const mkImg = (src,h,alt) => src ? React.createElement('img',{src,alt:alt||'',style:{width:'100%',height:h,objectFit:'cover',display:'block'}}) : null;
     const withImg = r => ({ ...r, hasPhoto: !!RIMG[r.id], noPhoto: !RIMG[r.id], imgEl: mkImg(RIMG[r.id],'240px',r.title) });

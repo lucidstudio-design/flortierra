@@ -151,7 +151,7 @@
         <div style="text-align:center;animation:floatUp .4s ease">
           <div style="width:84px;height:84px;border-radius:50%;background:#B5532E;display:flex;align-items:center;justify-content:center;margin:0 auto 26px"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F6F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <h2 style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:#F6F3EA;line-height:1.1">¡Mensaje enviado!</h2>
-          <p style="font-size:17px;line-height:1.7;color:#cdd8c6;margin-top:14px;font-weight:300">Gracias por escribirnos, {{ submittedName }}. Te responderemos en un máximo de un día hábil.</p>
+          <p style="font-size:17px;line-height:1.7;color:#cdd8c6;margin-top:14px;font-weight:300">Gracias por escribirnos, {{ submittedName }}. Te responderemos en seguida.</p>
           <a href="productos.html" style="text-decoration:none;display:inline-block;margin-top:28px;background:#F6F3EA;color:#1F3A28;padding:15px 30px;border-radius:40px;font-size:15px;font-weight:600">Ver productos →</a>
         </div>
       </sc-if>
@@ -210,17 +210,17 @@ class Component extends DCLogic {
     const data = new FormData(e.target);
     const nombre = (data.get('nombre')||'').toString().trim();
     const apellido = (data.get('apellido')||'').toString().trim();
-    const fullName = (nombre + ' ' + apellido).trim();
     const email = (data.get('email')||'').toString().trim();
     const asunto = (data.get('asunto')||'').toString();
     const mensaje = (data.get('mensaje')||'').toString();
-    // Params are sent under several aliases so the EmailJS template can use
-    // whichever variable names it defines; unused ones are ignored.
+    // Variable names must match the EmailJS template (template_oc5k4sv).
     const params = {
-      'Nombre': fullName, 'Correo': email, 'Asunto': asunto, 'Tu mensaje': mensaje,
-      nombre: fullName, correo: email, asunto: asunto, mensaje: mensaje,
-      name: fullName, from_name: fullName, email: email, reply_to: email,
-      subject: asunto, title: asunto, message: mensaje,
+      'Nombre': nombre,
+      'Apellido': apellido,
+      'Correo': email,
+      'Asunto': asunto,
+      'Tu mensaje': mensaje,
+      'time': new Date().toLocaleString('es-MX', { dateStyle:'medium', timeStyle:'short' }),
     };
     this.setState({ sending:true, sendError:false });
     fetch('https://api.emailjs.com/api/v1.0/email/send', {
