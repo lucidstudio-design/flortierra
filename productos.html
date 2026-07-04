@@ -270,6 +270,8 @@ class Component extends DCLogic {
             sizes:[{l:'Bolsa Kilo',g:'1000 g',p:600},{l:'Bolsa Grande',g:'250 g',p:210},{l:'Bolsa Chica',g:'160 g',p:150}] },
           { id:'mixgourmet-e', name:'Mix Gourmet', img:true, slot:'ft-c-mixgourmet', desc:'Almendra, cashew y nuez enchilada.',
             sizes:[{l:'Bolsa Kilo',g:'1000 g',p:560},{l:'Bolsa Grande',g:'315 g',p:220},{l:'Bolsa Chica',g:'210 g',p:160}] },
+          { id:'topping', name:'Topping Artesanal', img:true, slot:'ft-c-topping', desc:'Cacahuate, pepita de calabaza, ajonjolí, mezcla de chiles y aceite de oliva extra virgen.',
+            sizes:[{l:'Frasco',g:'200 g',p:130}] },
         ]},
         { heading:'Dulces', sub:'Endulzados con monkfruit', items:[
           { id:'garapinada', name:'Nuez garapiñada', img:true, slot:'ft-c-garapinada', desc:'Nuez pecana endulzada con monk fruit.',
@@ -278,8 +280,6 @@ class Component extends DCLogic {
             sizes:[{l:'Bolsa Kilo',g:'1000 g',p:950},{l:'Bolsa Grande',g:'300 g',p:330},{l:'Bolsa Chica',g:'200 g',p:220}] },
           { id:'granola', name:'Granola Gourmet', img:true, slot:'ft-c-granola', desc:'Macadamia, nuez, cashew, pistache, almendra, pepita, cacahuate, coco y chispas de chocolate y peanut butter sin azúcar.',
             sizes:[{l:'Bolsa Kilo',g:'1000 g',p:930},{l:'Bolsa Grande',g:'340 g',p:320},{l:'Bolsa Chica',g:'240 g',p:230}] },
-          { id:'topping', name:'Topping Artesanal', img:true, slot:'ft-c-topping', desc:'Cacahuate, pepita de calabaza, ajonjolí, mezcla de chiles y aceite de oliva extra virgen.',
-            sizes:[{l:'Frasco',g:'200 g',p:130}] },
           { id:'dubai', name:'Dubai Cookies', img:true, slot:'ft-c-dubai', desc:'Galleta con pistachella (kadayif, pistache y chocolate blanco), cubierta de spread de cocoa y avellana.',
             sizes:[{l:'Paquete',g:'5 piezas',p:255}] },
         ]},
@@ -318,7 +318,7 @@ class Component extends DCLogic {
       // consumo
       'almendra-e':'slot-img/ft-c-almendra.webp', 'mix-e':'slot-img/ft-c-mixe.webp',
       'cashew-e':'slot-img/ft-c-cashew.webp', 'nuez-e':'slot-img/ft-c-nueze.webp',
-      'mixgourmet-e':'slot-img/ft-c-mixgourmet.webp', 'garapinada':'slot-img/ft-c-garapinada.webp',
+      'mixgourmet-e':'slot-img/ft-c-mixgourmet.webp', 'garapinada':'slot-img/ft-c-garapinada.jpg',
       'caramelizado':'slot-img/ft-c-caramelizado.webp', 'granola':'slot-img/ft-granola-gourmet.png',
       'topping':'slot-img/ft-c-topping.webp', 'dubai':'slot-img/ft-c-dubai.webp',
     };
@@ -327,6 +327,7 @@ class Component extends DCLogic {
       .forEach(x => this.imgMap[x] = 'slot-img/ft-img-'+x+'.webp');
     // Real product photos provided by the client
     this.imgMap['frasco-petite'] = 'slot-img/ft-frasco-petite.png';
+    this.imgMap['gourmet-chico'] = 'slot-img/ft-img-gourmet-chico.jpg';
     this.imgMap['jarra-vaso'] = 'slot-img/ft-jarra-vidrio.png';
     this.sectionsMap = { consumo:this.consumo, regalos:this.regalos };
     this.tabDefs = [['consumo','Para consumo'],['regalos','Regalos']];
