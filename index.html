@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flor Tierra | Snacks saludables, naturalmente deliciosos</title>
+<meta name="description" content="Nueces, mixes y granolas artesanales sin azúcar añadida, hechos a mano en Monterrey. Snacks saludables, naturalmente deliciosos. Enviamos a todo México.">
+<link rel="canonical" href="https://flortierra.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Flor Tierra">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="Flor Tierra | Snacks saludables, naturalmente deliciosos">
+<meta property="og:description" content="Nueces, mixes y granolas artesanales sin azúcar añadida, hechos a mano en Monterrey. Snacks saludables, naturalmente deliciosos. Enviamos a todo México.">
+<meta property="og:url" content="https://flortierra.com/">
+<meta property="og:image" content="https://flortierra.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/favicon-light.png" media="(prefers-color-scheme: light)" />
 <link rel="icon" type="image/png" href="assets/favicon-dark.png" media="(prefers-color-scheme: dark)" />
 <script src="./support.js"></script>
@@ -133,7 +145,7 @@
   </div>
   <!-- right cream panel: product photo -->
   <div style="width:44%;background:#F6F3EA;position:relative;overflow:hidden;min-height:560px">
-    <img src="assets/hero-jars.png" alt="Almendras artesanales Flor Tierra" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+    <img src="assets/hero-jars.jpg" alt="Frascos de almendras artesanales Flor Tierra" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block">
   </div>
   </section>
 
@@ -292,9 +304,9 @@
       <a href="eventos.html" style="text-decoration:none;display:inline-block;margin-top:32px;background:#B5532E;color:#F6F3EA;border:none;padding:16px 30px;border-radius:40px;font-size:16px;font-weight:500;cursor:pointer;transition:background .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="background:#9d4527;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px rgba(13,20,14,.18)">Ver eventos pasados →</a>
     </div>
     <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;height:440px">
-      <img src="slot-img/ft-event-1.webp" alt="" style="width:100%;height:100%;grid-row:span 2;border-radius:20px;object-fit:cover;display:block">
-      <img src="slot-img/ft-event-2.jpg" alt="" style="width:100%;height:100%;border-radius:20px;object-fit:cover;display:block">
-      <img src="slot-img/ft-event-3.webp" alt="" style="width:100%;height:100%;border-radius:20px;object-fit:cover;display:block">
+      <img src="slot-img/ft-event-1.webp" alt="Mesa de botanas Flor Tierra en un evento" loading="lazy" style="width:100%;height:100%;grid-row:span 2;border-radius:20px;object-fit:cover;display:block">
+      <img src="slot-img/ft-event-2.jpg" alt="Detalle personalizado Flor Tierra para evento" loading="lazy" style="width:100%;height:100%;border-radius:20px;object-fit:cover;display:block">
+      <img src="slot-img/ft-event-3.webp" alt="Regalos personalizados Flor Tierra" loading="lazy" style="width:100%;height:100%;border-radius:20px;object-fit:cover;display:block">
     </div>
   </div>
 </section>
@@ -303,7 +315,7 @@
 <section style="background:#DCE7C8;padding:0">
   <div class="stack" style="max-width:1320px;margin:0 auto;display:flex;align-items:stretch;min-height:560px">
     <div style="width:48%;position:relative;padding:clamp(24px,4vw,40px) clamp(20px,3vw,40px) clamp(24px,4vw,40px) clamp(24px,4vw,48px);display:flex;align-items:center">
-      <img class="story-img" src="slot-img/ft-story.webp" alt="" style="width:100%;height:auto;border-radius:24px;object-fit:contain;display:block">
+      <img class="story-img" src="slot-img/ft-story.webp" alt="Productos artesanales Flor Tierra" loading="lazy" style="width:100%;height:auto;border-radius:24px;object-fit:contain;display:block">
     </div>
     <div style="width:52%;display:flex;align-items:center;padding:clamp(48px,7vw,80px) clamp(24px,4vw,48px) clamp(48px,7vw,80px) clamp(28px,5vw,72px)">
       <div style="max-width:none">
@@ -547,7 +559,7 @@ class Component extends DCLogic {
       name: p.name, detail: p.detail, tag: p.tag, slotId: p.slotId,
       hasImg:  !!p.imgSrc,
       hasSlot: !p.imgSrc,
-      imgEl: p.imgSrc ? React.createElement('img', { src: p.imgSrc, style: { width:'100%', height:'100%', objectFit:'cover', display:'block' } }) : null,
+      imgEl: p.imgSrc ? React.createElement('img', { src: p.imgSrc, alt: p.name, loading:'lazy', decoding:'async', style: { width:'100%', height:'100%', objectFit:'cover', display:'block' } }) : null,
       sizeRows: p.sizes.map((sz,idx) => ({
         l: sz.l, g: sz.g || '', hasG: !!sz.g,
         priceLabel: sz.range ? sz.range : this.money(sz.p),
@@ -569,7 +581,7 @@ class Component extends DCLogic {
       'papa-asada':'slot-img/recipe-papa-asada.jpg','brie-hojaldre':'slot-img/recipe-brie-hojaldre.jpg',
       'flautas':'slot-img/recipe-flautas.jpg','thai-noodles':'slot-img/recipe-thai-noodles.jpg',
     };
-    const mkImg = (src,h,alt) => src ? React.createElement('img',{src,alt:alt||'',style:{width:'100%',height:h,objectFit:'cover',display:'block'}}) : null;
+    const mkImg = (src,h,alt) => src ? React.createElement('img',{src,alt:alt||'',loading:'lazy',decoding:'async',style:{width:'100%',height:h,objectFit:'cover',display:'block'}}) : null;
     const rImg = r => ({ ...r, hasPhoto: !!recipeImg[r.id], noPhoto: !recipeImg[r.id], imgEl: mkImg(recipeImg[r.id],'240px',r.title) });
     const recipes = this.recipesData.slice(0, 3).map(r => ({ ...rImg(r), open: () => this.setState({ selId: r.id }) }));
     const selR = this.recipesData.find(r => r.id === this.state.selId);
