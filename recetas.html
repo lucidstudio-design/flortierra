@@ -129,7 +129,6 @@
         <div style="padding:24px 24px 28px">
           <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;font-size:13px;color:#8a9686">
             <span style="display:flex;align-items:center;gap:5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a9686" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>{{ r.time }}</span>
-            <span style="display:flex;align-items:center;gap:5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a9686" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>{{ r.serves }}</span>
           </div>
           <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:#1F3A28;line-height:1.2">{{ r.title }}</h3>
           <p style="font-size:15px;line-height:1.6;color:#7a8a76;margin-top:10px;font-weight:300">{{ r.desc }}</p>
@@ -202,7 +201,7 @@
       <div style="padding:40px 48px 48px">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
           <span style="background:#DCE7C8;color:#1F3A28;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:20px">{{ sel.tag }}</span>
-          <span style="font-size:14px;color:#8a9686">{{ sel.time }} · {{ sel.serves }}</span>
+          <span style="font-size:14px;color:#8a9686">{{ sel.time }}</span>
         </div>
         <h2 style="font-family:'Fraunces',serif;font-size:38px;font-weight:600;color:#1F3A28;line-height:1.08">{{ sel.title }}</h2>
         <p style="font-size:16px;line-height:1.7;color:#3a4a38;margin-top:14px;font-weight:300">{{ sel.desc }}</p>
@@ -248,39 +247,39 @@ class Component extends DCLogic {
     super(props);
     this.state = { cart: this.loadCart(), cartOpen:false, toast:'', selId:null };
     this.recipesData = [
-      { id:'salmon', title:'Salmón Gourmet', tag:'Comida', time:'20 min', serves:'2 porciones', slotId:'ft-r-salmon',
+      { id:'salmon', title:'Salmón Gourmet', tag:'Comida', time:'20 min', slotId:'ft-r-salmon',
         desc:'Filetes dorados al punto exacto, bañados con Topping Artesanal.',
         ingredients:['Filetes de salmón','Topping Artesanal Flor Tierra','Sal, pimienta y paprika'],
         steps:['Condimenta los filetes de salmón por ambos lados a tu gusto con sal, pimienta y paprika.','En un sartén precalentado a fuego medio-alto, agrega un poco del aceite de oliva del Topping Artesanal.','Dora los filetes de 3 a 4 minutos aproximadamente. Recuerda que el punto exacto de cocción es cuando, al picar su carne, se separa en capas.','Sírvelos y agrega la cantidad de Topping Artesanal según tu gusto. Asegúrate de que el Topping esté a temperatura ambiente.','Consejo: te recomendamos acompañarlo con verduras asadas y arroz blanco.'] },
-      { id:'ensalada-ricardo', title:'Ensalada Ricardo', tag:'Comida', time:'20 min', serves:'2 porciones', slotId:'ft-r-ensalada-ricardo',
+      { id:'bowl-bienestar', title:'Bowl Bienestar', tag:'Desayuno', time:'15 min', slotId:'ft-r-bowl-bienestar',
+        desc:'¿Con prisa? Un desayuno rápido y delicioso.',
+        ingredients:['Granola Gourmet Flor Tierra','Yogurt griego de tu preferencia','Fruta de tu preferencia'],
+        steps:['Lava, desinfecta y parte la fruta a utilizar.','Vierte el yogurt griego en un bowl.','Agrega la fruta.','Completa tu creación con nuestra exclusiva Granola Gourmet Flor Tierra.','¡Más crunch, más sabor, más saludable, más Flor Tierra!'] },
+      { id:'avocado', title:'Avocado Toast', tag:'Desayuno', time:'15 min', slotId:'ft-r-avocado',
+        desc:'Eleva tu desayuno a otro nivel.',
+        ingredients:['Pan','Aguacate','Huevo','Jamón de pavo','Tomate cherry','Topping Artesanal Flor Tierra','Sal y pimienta'],
+        steps:['Pon a tostar el pan.','Corta el aguacate en rebanadas.','En un plato, agrega un huevo con un poco de sal y pimienta y mezcla bien.','En un sartén a fuego medio, calienta un poco del aceite de oliva del Topping Artesanal. Agrega el jamón de pavo y revuelve.','Incorpora la mezcla de huevo al sartén, revolviendo constantemente para crear los huevos revueltos.','En cuanto el huevo esté cocido, retíralo del fuego.','Para servir, unta el aguacate sobre la rebanada de pan tostado y coloca encima el huevo revuelto.','Para finalizar, agrega tomate cherry y Topping Artesanal Flor Tierra al gusto.','Consejo: también puedes hacerlo con huevo pochado o estrellado.'] },
+      { id:'momentos', title:'Momentos Flor Tierra', tag:'Botana', time:'15 min', slotId:'ft-r-momentos',
+        desc:'Todo gran momento merece una gran botana.',
+        ingredients:['Cashew Enchilado Flor Tierra','Almendra Enchilada Flor Tierra','Mix Caramelizado Flor Tierra','Topping Artesanal Flor Tierra','Queso de tu preferencia (panela, brie o Philadelphia)','Uvas','Galletas'],
+        steps:['Prepara tu tabla o platón con los ingredientes Flor Tierra de tu preferencia.','Disfrútala con tus amigos o familia.'] },
+      { id:'ensalada-ricardo', title:'Ensalada Ricardo', tag:'Comida', time:'20 min', slotId:'ft-r-ensalada-ricardo',
         desc:'¿Cansado de las típicas ensaladas? Prueba ésta.',
         ingredients:['Lechuga según tu preferencia','Tomate cherry','Queso feta','Fajitas de pollo','Topping Artesanal Flor Tierra','Sal y pimienta'],
         steps:['Desinfecta la lechuga.','Condimenta las fajitas de pollo con sal y pimienta.','Dora el pollo con un poco del aceite de oliva del Topping Artesanal en un sartén precalentado.','Sobre una cama de lechuga, coloca los tomates cherry, el queso feta y las fajitas de pollo.','Agrega Topping Artesanal al gusto.','¡Disfrútala!'] },
-      { id:'avocado', title:'Avocado Toast', tag:'Desayuno', time:'15 min', serves:'1 porción', slotId:'ft-r-avocado',
-        desc:'¿Con prisa? Un desayuno rápido y delicioso.',
-        ingredients:['Pan','Aguacate','Huevo','Jamón de pavo','Tomate cherry','Topping Artesanal Flor Tierra','Sal y pimienta'],
-        steps:['Pon a tostar el pan.','Corta el aguacate en rebanadas.','En un plato, agrega un huevo con un poco de sal y pimienta y mezcla bien.','En un sartén a fuego medio, calienta un poco del aceite de oliva del Topping Artesanal. Agrega el jamón de pavo y revuelve.','Incorpora la mezcla de huevo al sartén, revolviendo constantemente para crear los huevos revueltos.','En cuanto el huevo esté cocido, retíralo del fuego.','Para servir, unta el aguacate sobre la rebanada de pan tostado y coloca encima el huevo revuelto.','Para finalizar, agrega tomate cherry y Topping Artesanal Flor Tierra al gusto.','Consejo: también puedes hacerlo con huevo pochado o estrellado.'] },
-      { id:'nieve-pepino', title:'Nieve de Pepino', tag:'Snack', time:'10 min + congelar', serves:'2 porciones', slotId:'ft-r-nieve-pepino',
-        desc:'Un snack saludable y refrescante para el calor.',
-        ingredients:['Pepino','Limón','Monkfruit','Pizca de sal','Salsa Tamarindo','Tajín'],
-        steps:['Corta un pepino pelado en cuadritos, quítale las semillas y ponlo en una bolsa en el congelador.','Ya congelado, ponlo en la licuadora junto con el jugo de un limón (o más, si te gusta más ácido), una cucharadita de Monkfruit y una pizca de sal.','Licúa y sirve en un plato hondo o copa para helado.','Para finalizar, agrega Salsa Tamarindo y Tajín al gusto.'] },
-      { id:'manzana-sana', title:'Manzana Sana', tag:'Snack', time:'5 min', serves:'1 porción', slotId:'ft-r-manzana-sana',
-        desc:'Para las prisas, un snack atractivo, delicioso y nutritivo.',
-        ingredients:['Manzana','Jamaica enchilada','Salsa Tamarindo','Limón','Tajín'],
-        steps:['Corta la manzana en rodajas o rebanadas y acomódalas en un plato.','Agrega jamaica enchilada a todos los pedazos de manzana.','Finalmente, sazónalos con Salsa Tamarindo, limón y Tajín al gusto.'] },
-      { id:'brie-hojaldre', title:'Queso Brie en Hojaldre', tag:'Botana', time:'25 min', serves:'6 porciones', slotId:'ft-r-brie-hojaldre',
+      { id:'papa-asada', title:'Papa Asada de la Casa', tag:'Comida', time:'50–60 min', slotId:'ft-r-papa-asada',
+        desc:'Atrévete a probar una nueva forma de disfrutar una papa asada.',
+        ingredients:['Papa','Mantequilla','Sal y pimienta','Crema','Topping Artesanal Flor Tierra'],
+        steps:['Lava tu papa y envuélvela en papel aluminio.','Hornéala hasta que esté bien cocida y suave.','Hazle un corte en forma de cruz.','Ponle un poco de mantequilla, sal y pimienta al gusto, y un poco de crema.','Agrega Topping Artesanal de forma generosa.','¡Disfrútala!'] },
+      { id:'brie-hojaldre', title:'Queso Brie en Hojaldre', tag:'Botana', time:'25 min', slotId:'ft-r-brie-hojaldre',
         desc:'Sorprende a tus invitados con esta botana elegante y deliciosa.',
         ingredients:['Queso brie','Masa de hojaldre','Topping Artesanal Flor Tierra'],
         steps:['Extiende un poco la masa de hojaldre y cubre el queso con ella.','Hornea el queso a 180 °C (350 °F) por 20 minutos o más, dependiendo de lo doradito que lo quieras.','Báñalo con la cantidad que gustes de Topping Artesanal Flor Tierra.','Consejo: lo puedes acompañar con las galletas de tu preferencia o con tostaditas Melba.'] },
-      { id:'pepinos-locos', title:'Pepinos Locos', tag:'Snack', time:'10 min', serves:'2 porciones', slotId:'ft-r-pepinos-locos',
-        desc:'¿Tienes antojo de algo saludable? Aquí lo tienes.',
-        ingredients:['Pepino','Jamaica enchilada','Salsa Tamarindo','Limón','Tajín'],
-        steps:['Corta el pepino en rodajas o tiras.','Báñalas con Salsa Tamarindo.','Agrega jamaica enchilada encima.','Finalmente, sazónalos con limón y Tajín al gusto.'] },
-      { id:'flautas', title:'Flautas especiales', tag:'Comida', time:'20 min', serves:'2 porciones', slotId:'ft-r-flautas',
+      { id:'flautas', title:'Flautas especiales', tag:'Comida', time:'20 min', slotId:'ft-r-flautas',
         desc:'Una cena gourmet sin salir de casa.',
-        ingredients:['Flautas que más te gusten','Frijoles','Crema','Topping Artesanal Flor Tierra','Lechuga'],
+        ingredients:['Flautas','Frijoles','Crema','Topping Artesanal Flor Tierra','Lechuga'],
         steps:['Fríe tus flautas o dóralas en el Air Fryer u horno.','Báñalas con crema y Topping Artesanal al gusto.','Acompáñalas con frijoles y ensalada.'] },
-      { id:'thai-noodles', title:'Thai Noodles', tag:'Comida', time:'25 min', serves:'2 porciones', slotId:'ft-r-thai-noodles',
+      { id:'thai-noodles', title:'Thai Noodles', tag:'Comida', time:'25 min', slotId:'ft-r-thai-noodles',
         desc:'Dale a tu pasta un sabor sorprendente.',
         ingredients:['Pasta ángel','Pollo','Ejote','Aceite de ajonjolí','Ajo','Cebolla','Topping Artesanal Flor Tierra'],
         steps:['Dora el pollo en trozos pequeños en aceite de ajonjolí y sazónalo con ajo, cebolla molida y sal.','Cuece la pasta ángel.','Agrega ejotes cocidos.','Finalmente, agrega Topping Artesanal al gusto y mézclalo con los noodles y los ejotes.'] },
@@ -292,10 +291,9 @@ class Component extends DCLogic {
   removeItem(id){ const cart=this.state.cart.filter(c=>c.id!==id); try{localStorage.setItem('ft-cart',JSON.stringify(cart));}catch(e){} this.setState({cart}); }
   renderVals(){
     const RIMG = {
-      'salmon':'slot-img/recipe-salmon.jpg',
-      'ensalada-ricardo':'slot-img/recipe-ensalada-ricardo.jpg','avocado':'slot-img/recipe-avocado.jpg',
-      'nieve-pepino':'slot-img/recipe-nieve-pepino.jpg','manzana-sana':'slot-img/recipe-manzana-sana.jpg',
-      'brie-hojaldre':'slot-img/recipe-brie-hojaldre.jpg','pepinos-locos':'slot-img/recipe-pepinos-locos.jpg',
+      'salmon':'slot-img/recipe-salmon.jpg','bowl-bienestar':'slot-img/recipe-bowl-bienestar.jpg',
+      'avocado':'slot-img/recipe-avocado.jpg','ensalada-ricardo':'slot-img/recipe-ensalada-ricardo.jpg',
+      'papa-asada':'slot-img/recipe-papa-asada.jpg','brie-hojaldre':'slot-img/recipe-brie-hojaldre.jpg',
       'flautas':'slot-img/recipe-flautas.jpg','thai-noodles':'slot-img/recipe-thai-noodles.jpg',
     };
     const mkImg = (src,h,alt) => src ? React.createElement('img',{src,alt:alt||'',style:{width:'100%',height:h,objectFit:'cover',display:'block'}}) : null;
